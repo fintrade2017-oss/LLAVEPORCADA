@@ -238,17 +238,37 @@
             font-size: 0.9rem;
         }
 
-        .links-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
+        /* --- ESTILOS DEL CARRUSEL DE ENLACES --- */
+        .carousel-wrapper {
             width: 100%;
+            max-width: 800px;
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .carousel-container {
+            position: relative;
+            height: 350px;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+
+        .carousel-slide {
+            display: none;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .carousel-slide.active {
+            display: block;
+            animation: fadeIn 0.8s ease;
         }
 
         .link-card {
             background: var(--color-surface);
             border: 1px solid var(--color-border);
-            padding: 30px;
+            padding: 40px;
             border-radius: 2px;
             text-decoration: none;
             color: var(--color-text);
@@ -257,14 +277,18 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            min-height: 180px;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            text-align: center;
         }
 
         .link-card::after {
             content: '';
             position: absolute;
-            top: 0;
+            bottom: 0;
             left: 0;
             width: 100%;
             height: 2px;
@@ -277,7 +301,6 @@
         .link-card:hover {
             background: var(--color-surface-light);
             border-color: rgba(212, 180, 131, 0.3);
-            transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(0,0,0,0.4);
         }
 
@@ -287,33 +310,99 @@
 
         .card-num {
             font-family: var(--font-serif);
-            font-size: 1.5rem;
+            font-size: 3rem;
             color: var(--color-primary);
-            opacity: 0.5;
-            margin-bottom: 15px;
+            opacity: 0.3;
+            margin-bottom: 10px;
+            line-height: 1;
         }
 
         .card-title {
-            font-size: 1.2rem;
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
             font-weight: 500;
-            margin: 0 0 10px 0;
+            margin: 0 0 15px 0;
             color: #fff;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
         }
 
         .card-desc {
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             color: var(--color-text-muted);
-            margin: 0;
+            margin: 0 0 30px 0;
             font-weight: 300;
+            max-width: 500px;
         }
 
-        .card-arrow {
-            margin-top: 20px;
+        .card-btn {
+            display: inline-block;
+            background: transparent;
+            border: 1px solid var(--color-primary);
             color: var(--color-primary);
-            font-size: 1.2rem;
-            align-self: flex-end;
+            padding: 12px 30px;
+            font-family: var(--font-sans);
+            font-weight: 600;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .link-card:hover .card-btn {
+            background: var(--color-primary);
+            color: #0c0c0d;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(22, 22, 26, 0.8);
+            color: var(--color-primary);
+            border: 1px solid var(--color-border);
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            user-select: none;
+            z-index: 10;
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-btn:hover {
+            background: var(--color-primary);
+            color: #0c0c0d;
+            border-color: var(--color-primary);
+        }
+
+        .carousel-btn.prev { left: -25px; }
+        .carousel-btn.next { right: -25px; }
+
+        .carousel-dots {
+            text-align: center;
+            padding-top: 25px;
+        }
+
+        .dot {
+            cursor: pointer;
+            height: 4px;
+            width: 25px;
+            margin: 0 5px;
+            background-color: rgba(255,255,255,0.2);
+            display: inline-block;
+            transition: all 0.4s ease;
+        }
+
+        .dot.active, .dot:hover {
+            background-color: var(--color-primary);
+            width: 35px;
         }
 
         /* Footer */
@@ -369,7 +458,10 @@
         @media (max-width: 768px) {
             header h1 { font-size: 2.5rem; }
             .lock-title { font-size: 2rem; }
-            .links-grid { grid-template-columns: 1fr; }
+            .card-title { font-size: 1.8rem; }
+            .carousel-btn.prev { left: 10px; }
+            .carousel-btn.next { right: 10px; }
+            .carousel-container { height: 400px; }
         }
     </style>
 </head>
@@ -404,46 +496,58 @@
                 <h2 data-es="Documentos Corporativos" data-en="Corporate Documents">Documentos Corporativos</h2>
             </header>
 
-            <div class="links-grid">
-                <!-- Link 1 -->
-                <a href="https://marketingporcada.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div>
-                        <div class="card-num">01</div>
-                        <h3 class="card-title" data-es="Marketing" data-en="Marketing">Marketing</h3>
-                        <p class="card-desc" data-es="Estrategia, visión y posicionamiento de marca." data-en="Strategy, vision and brand positioning.">Estrategia, visión y posicionamiento de marca.</p>
+            <div class="carousel-wrapper">
+                <div class="carousel-container">
+                    <!-- Slide 1 -->
+                    <div class="carousel-slide active">
+                        <a href="https://marketingporcada.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
+                            <div class="card-num">01</div>
+                            <h3 class="card-title" data-es="Marketing" data-en="Marketing">Marketing</h3>
+                            <p class="card-desc" data-es="Estrategia, visión y posicionamiento de marca del proyecto." data-en="Project strategy, vision and brand positioning.">Estrategia, visión y posicionamiento de marca del proyecto.</p>
+                            <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                        </a>
                     </div>
-                    <div class="card-arrow">→</div>
-                </a>
 
-                <!-- Link 2 -->
-                <a href="https://competenciainternacional.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div>
-                        <div class="card-num">02</div>
-                        <h3 class="card-title" data-es="Competencia" data-en="Competition">Competencia</h3>
-                        <p class="card-desc" data-es="Análisis de mercado y entorno regional." data-en="Market analysis and regional environment.">Análisis de mercado y entorno regional.</p>
+                    <!-- Slide 2 -->
+                    <div class="carousel-slide">
+                        <a href="https://competenciaporcada.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
+                            <div class="card-num">02</div>
+                            <h3 class="card-title" data-es="Competencia" data-en="Competition">Competencia</h3>
+                            <p class="card-desc" data-es="Análisis de mercado, entorno regional y benchmarking." data-en="Market analysis, regional environment and benchmarking.">Análisis de mercado, entorno regional y benchmarking.</p>
+                            <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                        </a>
                     </div>
-                    <div class="card-arrow">→</div>
-                </a>
 
-                <!-- Link 3 -->
-                <a href="https://roeampliada.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div>
-                        <div class="card-num">03</div>
-                        <h3 class="card-title" data-es="ROE Ampliada" data-en="Extended ROE">ROE Ampliada</h3>
-                        <p class="card-desc" data-es="Estructura financiera y retorno de inversión." data-en="Financial structure and return on investment.">Estructura financiera y retorno de inversión.</p>
+                    <!-- Slide 3 -->
+                    <div class="carousel-slide">
+                        <a href="https://roeampliada.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
+                            <div class="card-num">03</div>
+                            <h3 class="card-title" data-es="ROE Ampliada" data-en="Extended ROE">ROE Ampliada</h3>
+                            <p class="card-desc" data-es="Estructura financiera, OPEX y retorno de inversión detallado." data-en="Financial structure, OPEX and detailed return on investment.">Estructura financiera, OPEX y retorno de inversión detallado.</p>
+                            <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                        </a>
                     </div>
-                    <div class="card-arrow">→</div>
-                </a>
 
-                <!-- Link 4 -->
-                <a href="https://capexporcada.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div>
-                        <div class="card-num">04</div>
-                        <h3 class="card-title" data-es="CAPEX" data-en="CAPEX">CAPEX</h3>
-                        <p class="card-desc" data-es="Inversión, costes y ingeniería del proyecto." data-en="Investment, costs and project engineering.">Inversión, costes y ingeniería del proyecto.</p>
+                    <!-- Slide 4 -->
+                    <div class="carousel-slide">
+                        <a href="https://capexporcada.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
+                            <div class="card-num">04</div>
+                            <h3 class="card-title" data-es="CAPEX" data-en="CAPEX">CAPEX</h3>
+                            <p class="card-desc" data-es="Inversión, costes de construcción e ingeniería sísmica del proyecto." data-en="Investment, construction costs and seismic engineering of the project.">Inversión, costes de construcción e ingeniería sísmica del proyecto.</p>
+                            <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                        </a>
                     </div>
-                    <div class="card-arrow">→</div>
-                </a>
+
+                    <button class="carousel-btn prev" onclick="moveSlide(-1)">&#10094;</button>
+                    <button class="carousel-btn next" onclick="moveSlide(1)">&#10095;</button>
+                </div>
+
+                <div class="carousel-dots">
+                    <span class="dot active" onclick="currentSlide(0)"></span>
+                    <span class="dot" onclick="currentSlide(1)"></span>
+                    <span class="dot" onclick="currentSlide(2)"></span>
+                    <span class="dot" onclick="currentSlide(3)"></span>
+                </div>
             </div>
         </div>
 
@@ -467,12 +571,55 @@
             if (password === 'TAKYMA2026') {
                 lockScreen.style.display = 'none';
                 dashboard.style.display = 'flex';
+                startAutoSlide(); // Inicia el carrusel automáticamente al desbloquear
             } else {
                 // Mensaje de error bilingüe según el idioma actual
                 errorMsg.innerText = currentLang === 'ES' ? 'Clave incorrecta. Acceso denegado.' : 'Incorrect key. Access denied.';
                 form.classList.add('shake'); // Añade animación de temblor
                 setTimeout(() => form.classList.remove('shake'), 300);
             }
+        }
+
+        // LÓGICA DEL CARRUSEL
+        let slideIndex = 0;
+        let autoSlideInterval;
+
+        function showSlide(index) {
+            const slides = document.querySelectorAll('.carousel-slide');
+            const dots = document.querySelectorAll('.dot');
+
+            if (index >= slides.length) slideIndex = 0;
+            if (index < 0) slideIndex = slides.length - 1;
+
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            slides[slideIndex].classList.add('active');
+            dots[slideIndex].classList.add('active');
+        }
+
+        function moveSlide(step) {
+            slideIndex += step;
+            showSlide(slideIndex);
+            resetAutoSlide();
+        }
+
+        function currentSlide(index) {
+            slideIndex = index;
+            showSlide(slideIndex);
+            resetAutoSlide();
+        }
+
+        function startAutoSlide() {
+            autoSlideInterval = setInterval(() => {
+                slideIndex++;
+                showSlide(slideIndex);
+            }, 6000); // 6 segundos por slide
+        }
+
+        function resetAutoSlide() {
+            clearInterval(autoSlideInterval);
+            startAutoSlide();
         }
 
         // LÓGICA DE CAMBIO DE IDIOMA
