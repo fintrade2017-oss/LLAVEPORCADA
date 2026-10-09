@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Takyma Investment Pioneer - Acceso Privado</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #0c0c0d;
+            --color-surface: #16161a;
+            --color-surface-light: #1f1f24;
+            --color-primary: #d4b483;
+            --color-primary-bright: #e8cf9e;
+            --color-eco: #8f9b77;
+            --color-sec: #a07c7c;
+            --color-text: #f5f5f5;
+            --color-text-muted: #9a9a9a;
+            --color-border: rgba(255, 255, 255, 0.08);
+            --font-serif: 'Cormorant Garamond', serif;
+            --font-sans: 'Montserrat', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--color-bg);
+            background-image: radial-gradient(circle at top right, #1a1a1e 0%, #0c0c0d 60%);
+            color: var(--color-text);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            font-weight: 300;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 30px;
+            width: 100%;
+            box-sizing: border-box;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 40px;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: 1px solid var(--color-primary);
+            color: var(--color-primary);
+            padding: 10px 24px;
+            font-family: var(--font-sans);
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: all 0.4s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+        }
+
+        .lang-btn:hover {
+            background: var(--color-primary);
+            color: #0c0c0d;
+            box-shadow: 0 4px 15px rgba(212, 180, 131, 0.3);
+        }
+
+        /* Lock Screen */
+        .lock-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+            animation: fadeInUp 1s ease;
+        }
+
+        .logo-glow {
+            width: 140px;
+            height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .logo-glow::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--color-primary);
+            filter: blur(50px);
+            opacity: 0.3;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .main-logo {
+            max-width: 140px;
+            max-height: 140px;
+            object-fit: contain;
+            position: relative;
+            z-index: 2;
+            filter: brightness(1.2);
+        }
+
+        .lock-title {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            color: var(--color-text);
+            margin: 0 0 10px 0;
+            font-weight: 500;
+            letter-spacing: 2px;
+        }
+
+        .lock-subtitle {
+            color: var(--color-primary);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 40px;
+        }
+
+        .access-form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .pass-input {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-primary);
+            padding: 15px 20px;
+            color: var(--color-text);
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            text-align: center;
+            letter-spacing: 2px;
+            border-radius: 2px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .pass-input:focus {
+            background: rgba(212, 180, 131, 0.05);
+            border-color: var(--color-primary-bright);
+        }
+
+        .submit-btn {
+            background: transparent;
+            border: 1px solid var(--color-primary);
+            color: var(--color-primary);
+            padding: 15px 30px;
+            font-family: var(--font-sans);
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: all 0.4s ease;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.9rem;
+        }
+
+        .submit-btn:hover {
+            background: var(--color-primary);
+            color: #0c0c0d;
+            box-shadow: 0 8px 20px rgba(212, 180, 131, 0.3);
+        }
+
+        .error-text {
+            color: var(--color-sec);
+            font-size: 0.8rem;
+            margin-top: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            height: 15px;
+        }
+
+        /* Dashboard (Unlocked) */
+        .dashboard {
+            display: none;
+            width: 100%;
+            flex-direction: column;
+            align-items: center;
+            animation: fadeIn 1.5s ease;
+        }
+
+        .dashboard-logo {
+            max-height: 60px;
+            max-width: 250px;
+            object-fit: contain;
+            margin-bottom: 40px;
+            filter: brightness(1.2);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        header h1 {
+            font-family: var(--font-serif);
+            font-size: 3.5rem;
+            color: var(--color-text);
+            font-weight: 500;
+            margin: 0;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        header h2 {
+            font-family: var(--font-sans);
+            font-weight: 300;
+            color: var(--color-primary);
+            margin: 15px 0 0;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            width: 100%;
+        }
+
+        .link-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            padding: 30px;
+            border-radius: 2px;
+            text-decoration: none;
+            color: var(--color-text);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 180px;
+        }
+
+        .link-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--color-primary);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .link-card:hover {
+            background: var(--color-surface-light);
+            border-color: rgba(212, 180, 131, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+        }
+
+        .link-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .card-num {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            color: var(--color-primary);
+            opacity: 0.5;
+            margin-bottom: 15px;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin: 0 0 10px 0;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .card-desc {
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+            margin: 0;
+            font-weight: 300;
+        }
+
+        .card-arrow {
+            margin-top: 20px;
+            color: var(--color-primary);
+            font-size: 1.2rem;
+            align-self: flex-end;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 60px;
+            padding: 30px 20px;
+            border-top: 1px solid var(--color-border);
+            text-align: center;
+            color: var(--color-text-muted);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            width: 100%;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        footer strong {
+            color: var(--color-primary);
+            font-weight: 500;
+        }
+
+        .eco-logo {
+            max-height: 40px;
+            opacity: 0.8;
+            filter: brightness(1.2);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Shake animation for wrong password */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+        }
+
+        .shake {
+            animation: shake 0.3s ease-in-out;
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.5rem; }
+            .lock-title { font-size: 2rem; }
+            .links-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="top-bar">
+            <button class="lang-btn" onclick="toggleLanguage()" id="langBtn">🌐 English</button>
+        </div>
+
+        <!-- LOCK SCREEN -->
+        <div class="lock-screen" id="lockScreen">
+            <div class="logo-glow">
+                <img src="images/TAKYMA.PNG" alt="Takyma Logo" class="main-logo" onerror="this.style.display='none';">
+            </div>
+            <h1 class="lock-title" data-es="Takyma" data-en="Takyma">Takyma</h1>
+            <p class="lock-subtitle" data-es="Investment Pioneer" data-en="Investment Pioneer">Investment Pioneer</p>
+            
+            <form class="access-form" onsubmit="checkPassword(event)">
+                <input type="password" class="pass-input" id="passInput" placeholder="CLAVE DE ACCESO / ACCESS KEY" required>
+                <button type="submit" class="submit-btn" data-es="ENTRAR" data-en="ENTER">ENTRAR</button>
+            </form>
+            <div class="error-text" id="errorMsg"></div>
+        </div>
+
+        <!-- DASHBOARD (Hidden by default) -->
+        <div class="dashboard" id="dashboard">
+            <img src="images/TAKYMA.PNG" alt="Takyma Logo" class="dashboard-logo" onerror="this.style.display='none';">
+            
+            <header>
+                <h1 data-es="Ecosistema La Porcada" data-en="La Porcada Ecosystem">Ecosistema La Porcada</h1>
+                <h2 data-es="Documentos Corporativos" data-en="Corporate Documents">Documentos Corporativos</h2>
+            </header>
+
+            <div class="links-grid">
+                <!-- Link 1 -->
+                <a href="https://app.netlify.com/projects/marketingporcada/overview" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div>
+                        <div class="card-num">01</div>
+                        <h3 class="card-title" data-es="Marketing" data-en="Marketing">Marketing</h3>
+                        <p class="card-desc" data-es="Estrategia, visión y posicionamiento de marca." data-en="Strategy, vision and brand positioning.">Estrategia, visión y posicionamiento de marca.</p>
+                    </div>
+                    <div class="card-arrow">→</div>
+                </a>
+
+                <!-- Link 2 -->
+                <a href="https://app.netlify.com/projects/competenciaporcada/overview" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div>
+                        <div class="card-num">02</div>
+                        <h3 class="card-title" data-es="Competencia" data-en="Competition">Competencia</h3>
+                        <p class="card-desc" data-es="Análisis de mercado y entorno regional." data-en="Market analysis and regional environment.">Análisis de mercado y entorno regional.</p>
+                    </div>
+                    <div class="card-arrow">→</div>
+                </a>
+
+                <!-- Link 3 -->
+                <a href="https://app.netlify.com/projects/roeampliada/overview" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div>
+                        <div class="card-num">03</div>
+                        <h3 class="card-title" data-es="ROE Ampliada" data-en="Extended ROE">ROE Ampliada</h3>
+                        <p class="card-desc" data-es="Estructura financiera y retorno de inversión." data-en="Financial structure and return on investment.">Estructura financiera y retorno de inversión.</p>
+                    </div>
+                    <div class="card-arrow">→</div>
+                </a>
+
+                <!-- Link 4 -->
+                <a href="https://app.netlify.com/projects/capexporcada/overview" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div>
+                        <div class="card-num">04</div>
+                        <h3 class="card-title" data-es="CAPEX" data-en="CAPEX">CAPEX</h3>
+                        <p class="card-desc" data-es="Inversión, costes y ingeniería del proyecto." data-en="Investment, costs and project engineering.">Inversión, costes y ingeniería del proyecto.</p>
+                    </div>
+                    <div class="card-arrow">→</div>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <img src="images/ECO.PNG" alt="EcoResort Logo" class="eco-logo" onerror="this.style.display='none';">
+        <p>© 2026 <strong>EcoResort La Porcada</strong> by <strong>Takyma Investment Pioneer</strong></p>
+    </footer>
+
+    <script>
+        // LÓGICA DE CONTRASEÑA
+        function checkPassword(event) {
+            event.preventDefault(); // Evita que el formulario recargue la página
+            const password = document.getElementById('passInput').value;
+            const errorMsg = document.getElementById('errorMsg');
+            const lockScreen = document.getElementById('lockScreen');
+            const dashboard = document.getElementById('dashboard');
+            const form = document.querySelector('.access-form');
+
+            if (password === 'TAKYMA2026') {
+                lockScreen.style.display = 'none';
+                dashboard.style.display = 'flex';
+            } else {
+                // Mensaje de error bilingüe según el idioma actual
+                errorMsg.innerText = currentLang === 'ES' ? 'Clave incorrecta. Acceso denegado.' : 'Incorrect key. Access denied.';
+                form.classList.add('shake'); // Añade animación de temblor
+                setTimeout(() => form.classList.remove('shake'), 300);
+            }
+        }
+
+        // LÓGICA DE CAMBIO DE IDIOMA
+        let currentLang = 'ES';
+        function toggleLanguage() {
+            currentLang = currentLang === 'ES' ? 'EN' : 'ES';
+            
+            const btn = document.getElementById('langBtn');
+            btn.innerText = currentLang === 'ES' ? '🌐 English' : '🌐 Español';
+
+            const elements = document.querySelectorAll('[data-es][data-en]');
+            elements.forEach(el => {
+                el.innerText = currentLang === 'ES' ? el.getAttribute('data-es') : el.getAttribute('data-en');
+            });
+        }
+    </script>
+</body>
+</html>
