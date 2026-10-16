@@ -405,20 +405,21 @@
             width: 35px;
         }
 
-        /* --- ESTILOS DEL VIDEO FINAL --- */
+        /* --- ESTILOS DE LOS VIDEOS FINALES --- */
         .video-section {
             width: 100%;
             max-width: 1000px;
             margin-top: 20px;
+            margin-bottom: 40px;
             text-align: center;
-            animation: fadeIn 2s ease-in; /* Fader aplicado aquí */
+            animation: fadeIn 2s ease-in;
         }
 
         .video-title {
             font-family: var(--font-serif);
             font-size: 2.5rem;
             color: var(--color-primary);
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             letter-spacing: 2px;
         }
 
@@ -429,6 +430,7 @@
             overflow: hidden;
             box-shadow: 0 15px 40px rgba(0,0,0,0.6);
             background: #000;
+            margin-bottom: 60px; /* Espacio entre el video 1 y el 2 */
         }
 
         .promo-video {
@@ -437,10 +439,11 @@
         }
 
         .video-desc {
-            margin-top: 20px;
+            margin-top: 15px;
             color: var(--color-text-muted);
             font-size: 0.9rem;
             letter-spacing: 1px;
+            margin-bottom: 20px;
         }
 
         /* Footer */
@@ -659,7 +662,7 @@
 
                     <!-- Slide 12 -->
                     <div class="carousel-slide">
-                        <a href="https://webtakinves.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
+                        <a href="https://programaejecucion.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
                             <div class="card-num">12</div>
                             <h3 class="card-title" data-es="Legado Familiar" data-en="Family Legacy">Legado Familiar</h3>
                             <p class="card-desc" data-es="Takyma S.A. estructura el capital norteamericano con beneficios fiscales. Sin estrategia de salida: los inversores somos los desarrolladores de nuestro propio legado." data-en="Takyma Corp. structures US capital with tax benefits. No exit strategy: the investors are the developers of our own legacy.">Takyma S.A. estructura el capital norteamericano con beneficios fiscales. Sin estrategia de salida: los inversores somos los desarrolladores de nuestro propio legado.</p>
@@ -688,7 +691,7 @@
                 </div>
             </div>
 
-            <!-- SECCIÓN DE VIDEO FINAL -->
+            <!-- SECCIÓN DE VIDEOS FINALES -->
             <div class="video-section">
                 <h2 class="video-title" data-es="La Visión en Imagen" data-en="The Vision in Images">La Visión en Imagen</h2>
                 <div class="video-container">
@@ -698,6 +701,17 @@
                     </video>
                 </div>
                 <p class="video-desc" data-es="Serenidad, confidencialidad y naturaleza casada con el lujo. Una experiencia visual del futuro del Pacífico." data-en="Serenity, confidentiality, and nature paired with luxury. A visual experience of the future of the Pacific.">Serenidad, confidencialidad y naturaleza casada con el lujo. Una experiencia visual del futuro del Pacífico.</p>
+
+                <!-- VIDEO REAL DESCARGADO DE YOUTUBE -->
+                <h2 class="video-title" data-es="La Porcada en la Realidad" data-en="La Porcada in Reality">La Porcada en la Realidad</h2>
+                <div class="video-container">
+                    <video class="promo-video" autoplay loop muted playsinline>
+                        <!-- AQUÍ PONES EL NOMBRE DEL ARCHIVO QUE DESCARGUES -->
+                        <source src="video/REALPORCADA.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <p class="video-desc" data-es="Un vistazo aéreo y real de la joya del Pacífico panameño." data-en="A real and aerial glimpse of the jewel of the Panamanian Pacific.">Un vistazo aéreo y real de la joya del Pacífico panameño.</p>
             </div>
         </div>
 
