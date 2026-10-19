@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Takyma Investment Pioneer - Acceso Privado</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #0c0c0d;
+            --color-surface: #16161a;
+            --color-surface-light: #1f1f24;
+            --color-primary: #d4b483;
+            --color-primary-bright: #e8cf9e;
+            --color-eco: #8f9b77;
+            --color-sec: #a07c7c;
+            --color-text: #f5f5f5;
+            --color-text-muted: #9a9a9a;
+            --color-border: rgba(255, 255, 255, 0.08);
+            --font-serif: 'Cormorant Garamond', serif;
+            --font-sans: 'Montserrat', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--color-bg);
+            background-image: radial-gradient(circle at top right, #1a1a1e 0%, #0c0c0d 60%);
+            color: var(--color-text);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            font-weight: 300;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 30px;
+            width: 100%;
+            box-sizing: border-box;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 40px;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: 1px solid var(--color-primary);
+            color: var(--color-primary);
+            padding: 10px 24px;
+            font-family: var(--font-sans);
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: all 0.4s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+        }
+
+        .lang-btn:hover {
+            background: var(--color-primary);
+            color: #0c0c0d;
+            box-shadow: 0 4px 15px rgba(212, 180, 131, 0.3);
+        }
+
+        /* Lock Screen */
+        .lock-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+            animation: fadeInUp 1s ease;
+        }
+
+        .logo-glow {
+            width: 140px;
+            height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .logo-glow::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--color-primary);
+            filter: blur(50px);
+            opacity: 0.3;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .main-logo {
+            max-width: 140px;
+            max-height: 140px;
+            object-fit: contain;
+            position: relative;
+            z-index: 2;
+            filter: brightness(1.2);
+        }
+
+        .lock-title {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            color: var(--color-text);
+            margin: 0 0 10px 0;
+            font-weight: 500;
+            letter-spacing: 2px;
+        }
+
+        .lock-subtitle {
+            color: var(--color-primary);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 40px;
+        }
+
+        .access-form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .pass-input {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-primary);
+            padding: 15px 20px;
+            color: var(--color-text);
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            text-align: center;
+            letter-spacing: 2px;
+            border-radius: 2px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .pass-input:focus {
+            background: rgba(212, 180, 131, 0.05);
+            border-color: var(--color-primary-bright);
+        }
+
+        .submit-btn {
+            background: transparent;
+            border: 1px solid var(--color-primary);
+            color: var(--color-primary);
+            padding: 15px 30px;
+            font-family: var(--font-sans);
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: all 0.4s ease;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.9rem;
+        }
+
+        .submit-btn:hover {
+            background: var(--color-primary);
+            color: #0c0c0d;
+            box-shadow: 0 8px 20px rgba(212, 180, 131, 0.3);
+        }
+
+        .error-text {
+            color: var(--color-sec);
+            font-size: 0.8rem;
+            margin-top: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            height: 15px;
+        }
+
+        /* Dashboard (Unlocked) */
+        .dashboard {
+            display: none;
+            width: 100%;
+            flex-direction: column;
+            align-items: center;
+            animation: fadeIn 1.5s ease;
+        }
+
+        .dashboard-logo {
+            max-height: 60px;
+            max-width: 250px;
+            object-fit: contain;
+            margin-bottom: 40px;
+            filter: brightness(1.2);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        header h1 {
+            font-family: var(--font-serif);
+            font-size: 3.5rem;
+            color: var(--color-text);
+            font-weight: 500;
+            margin: 0;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        header h2 {
+            font-family: var(--font-sans);
+            font-weight: 300;
+            color: var(--color-primary);
+            margin: 15px 0 0;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        /* --- ESTILOS DEL CARRUSEL DE ENLACES --- */
+        .carousel-wrapper {
+            width: 100%;
+            max-width: 800px;
+            position: relative;
+            margin-bottom: 60px;
+        }
+
+        .carousel-container {
+            position: relative;
+            height: 350px;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+
+        .carousel-slide {
+            display: none;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .carousel-slide.active {
+            display: block;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .link-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            padding: 40px;
+            border-radius: 2px;
+            text-decoration: none;
+            color: var(--color-text);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .link-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--color-primary);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .link-card:hover {
+            background: var(--color-surface-light);
+            border-color: rgba(212, 180, 131, 0.3);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+        }
+
+        .link-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .card-num {
+            font-family: var(--font-serif);
+            font-size: 3rem;
+            color: var(--color-primary);
+            opacity: 0.3;
+            margin-bottom: 10px;
+            line-height: 1;
+        }
+
+        .card-title {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            font-weight: 500;
+            margin: 0 0 15px 0;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: var(--color-text-muted);
+            margin: 0 0 30px 0;
+            font-weight: 300;
+            max-width: 500px;
+        }
+
+        .card-btn {
+            display: inline-block;
+            background: transparent;
+            border: 1px solid var(--color-primary);
+            color: var(--color-primary);
+            padding: 12px 30px;
+            font-family: var(--font-sans);
+            font-weight: 600;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .link-card:hover .card-btn {
+            background: var(--color-primary);
+            color: #0c0c0d;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(22, 22, 26, 0.8);
+            color: var(--color-primary);
+            border: 1px solid var(--color-border);
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            user-select: none;
+            z-index: 10;
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-btn:hover {
+            background: var(--color-primary);
+            color: #0c0c0d;
+            border-color: var(--color-primary);
+        }
+
+        .carousel-btn.prev { left: -25px; }
+        .carousel-btn.next { right: -25px; }
+
+        .carousel-dots {
+            text-align: center;
+            padding-top: 25px;
+        }
+
+        .dot {
+            cursor: pointer;
+            height: 4px;
+            width: 25px;
+            margin: 0 5px;
+            background-color: rgba(255,255,255,0.2);
+            display: inline-block;
+            transition: all 0.4s ease;
+        }
+
+        .dot.active, .dot:hover {
+            background-color: var(--color-primary);
+            width: 35px;
+        }
+
+        /* --- ESTILOS DE LOS VIDEOS FINALES --- */
+        .video-section {
+            width: 100%;
+            max-width: 1000px;
+            margin-top: 20px;
+            margin-bottom: 40px;
+            text-align: center;
+            animation: fadeIn 2s ease-in;
+        }
+
+        .video-title {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            color: var(--color-primary);
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .video-container {
+            position: relative;
+            border: 1px solid var(--color-primary);
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            background: #000;
+            margin-bottom: 60px; /* Espacio entre el video 1 y el 2 */
+        }
+
+        .promo-video {
+            width: 100%;
+            display: block;
+        }
+
+        .video-desc {
+            margin-top: 15px;
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        /* SUPER PREMIUM CARD (OASIS) */
+        .link-card.is-super-premium {
+            background: linear-gradient(135deg, #1a1a1e 0%, #2a2419 50%, #1a1a1e 100%);
+            border: 1px solid rgba(212, 180, 131, 0.5);
+            box-shadow: inset 0 0 60px rgba(212, 180, 131, 0.08), 0 0 30px rgba(212, 180, 131, 0.15);
+        }
+        .link-card.is-super-premium::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(212, 180, 131, 0.12) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .link-card.is-super-premium > * {
+            position: relative;
+            z-index: 1;
+        }
+        .link-card.is-super-premium .card-num {
+            color: var(--color-primary-bright);
+            opacity: 0.5;
+            text-shadow: 0 0 20px rgba(212, 180, 131, 0.4);
+        }
+        .link-card.is-super-premium .card-title {
+            text-shadow: 0 0 24px rgba(212, 180, 131, 0.35);
+        }
+        .link-card.is-super-premium .card-btn {
+            background: linear-gradient(135deg, rgba(212, 180, 131, 0.15), rgba(212, 180, 131, 0.05));
+            border-color: var(--color-primary-bright);
+            color: var(--color-primary-bright);
+            text-shadow: 0 0 12px rgba(212, 180, 131, 0.4);
+            padding: 14px 36px;
+            letter-spacing: 3px;
+        }
+        .link-card.is-super-premium .card-btn::before {
+            content: '◆ ';
+            margin-right: 8px;
+        }
+        .link-card.is-super-premium:hover {
+            background: linear-gradient(135deg, #2a2419 0%, #3a3225 50%, #1a1a1e 100%);
+            border-color: var(--color-primary-bright);
+            box-shadow: inset 0 0 80px rgba(212, 180, 131, 0.12), 0 0 50px rgba(212, 180, 131, 0.25);
+        }
+        .link-card.is-super-premium:hover .card-btn {
+            background: var(--color-primary-bright);
+            color: #0c0c0d;
+            box-shadow: 0 8px 30px rgba(212, 180, 131, 0.5);
+            text-shadow: none;
+        }
+        .card-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 6px 14px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-bright));
+            color: #0c0c0d;
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            font-weight: 700;
+            border-radius: 50px;
+            text-transform: uppercase;
+            z-index: 2;
+            box-shadow: 0 4px 15px rgba(212, 180, 131, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .card-badge::before {
+            content: '◆';
+            font-size: 0.55rem;
+        }
+        .card-badge::after {
+            content: '◆';
+            font-size: 0.55rem;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 60px;
+            padding: 30px 20px;
+            border-top: 1px solid var(--color-border);
+            text-align: center;
+            color: var(--color-text-muted);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            width: 100%;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        footer strong {
+            color: var(--color-primary);
+            font-weight: 500;
+        }
+
+        .eco-logo {
+            max-height: 40px;
+            opacity: 0.8;
+            filter: brightness(1.2);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Shake animation for wrong password */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+        }
+
+        .shake {
+            animation: shake 0.3s ease-in-out;
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.5rem; }
+            .lock-title { font-size: 2rem; }
+            .card-title { font-size: 1.8rem; }
+            .carousel-btn.prev { left: 10px; }
+            .carousel-btn.next { right: 10px; }
+            .carousel-container { height: 400px; }
+            .video-title { font-size: 2rem; }
+            .manglar-title { font-size: 1.8rem; letter-spacing: 3px; }
+            .manglar-subtitle { font-size: 0.9rem; }
+            .manglar-skip { bottom: 20px; right: 20px; padding: 10px 20px; }
+        }
+
+        /* ============================================
+           OVERLAY CINEMATOGRÁFICO DE LOS MANGLARES
+           Se lanza tras inactividad en el slide 13
+           ============================================ */
+        .manglar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+            z-index: 9998;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 1.4s ease, visibility 1.4s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .manglar-overlay.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .manglar-overlay.closing {
+            opacity: 0;
+        }
+
+        .manglar-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: cover;
+            filter: brightness(0.88) contrast(1.08) saturate(1.15);
+        }
+
+        .manglar-vignette {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(ellipse at center, transparent 25%, rgba(0,0,0,0.55) 100%),
+                linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, transparent 28%, transparent 60%, rgba(0,0,0,0.9) 100%);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .manglar-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            padding: 40px;
+            max-width: 800px;
+        }
+
+        .manglar-title {
+            font-family: var(--font-serif);
+            font-size: 2.8rem;
+            color: var(--color-primary-bright);
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            text-shadow: 0 4px 24px rgba(0,0,0,0.95);
+            margin: 0 0 14px 0;
+            font-weight: 400;
+            opacity: 0;
+            transform: translateY(15px);
+            animation: manglar-text-in 2.2s cubic-bezier(0.22, 1, 0.36, 1) 1.2s forwards;
+        }
+
+        .manglar-subtitle {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.92);
+            letter-spacing: 4px;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.95);
+            opacity: 0;
+            transform: translateY(15px);
+            animation: manglar-text-in 2.2s cubic-bezier(0.22, 1, 0.36, 1) 2.2s forwards;
+        }
+
+        .manglar-divider {
+            width: 60px;
+            height: 1px;
+            background: var(--color-primary);
+            margin: 24px auto;
+            opacity: 0;
+            animation: manglar-text-in 1.8s ease-out 1.8s forwards;
+        }
+
+        .manglar-skip {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            z-index: 4;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.3);
+            color: rgba(255,255,255,0.7);
+            padding: 12px 28px;
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(4px);
+            opacity: 0;
+            animation: manglar-text-in 1s ease-out 3s forwards;
+        }
+
+        .manglar-skip:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: var(--color-primary);
+            color: var(--color-primary-bright);
+            letter-spacing: 4px;
+        }
+
+        .manglar-counter {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            z-index: 4;
+            color: rgba(255,255,255,0.5);
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: manglar-text-in 1s ease-out 3s forwards;
+        }
+
+        @keyframes manglar-text-in {
+            0%   { opacity: 0; transform: translateY(15px); }
+            100% { opacity: 1; transform: translateY(0);    }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="top-bar">
+            <button class="lang-btn" onclick="toggleLanguage()" id="langBtn">🌐 English</button>
+        </div>
+
+        <!-- LOCK SCREEN -->
+        <div class="lock-screen" id="lockScreen">
+            <div class="logo-glow">
+                <img src="images/TAKYMA.PNG" alt="Takyma Logo" class="main-logo" onerror="this.style.display='none';">
+            </div>
+            <h1 class="lock-title" data-es="Takyma" data-en="Takyma">Takyma</h1>
+            <p class="lock-subtitle" data-es="Investment Pioneer" data-en="Investment Pioneer">Investment Pioneer</p>
+            
+            <form class="access-form" onsubmit="checkPassword(event)">
+                <input type="password" class="pass-input" id="passInput" placeholder="CLAVE DE ACCESO / ACCESS KEY" required>
+                <button type="submit" class="submit-btn" data-es="ENTRAR" data-en="ENTER">ENTRAR</button>
+            </form>
+            <div class="error-text" id="errorMsg"></div>
+        </div>
+
+        <!-- DASHBOARD (Hidden by default) -->
+        <div class="dashboard" id="dashboard">
+            <img src="images/TAKYMA.PNG" alt="Takyma Logo" class="dashboard-logo" onerror="this.style.display='none';">
+            
+            <header>
+                <h1 data-es="Ecosistema La Porcada" data-en="La Porcada Ecosystem">Ecosistema La Porcada</h1>
+                <h2 data-es="Documentos Corporativos" data-en="Corporate Documents">Documentos Corporativos</h2>
+            </header>
+
+            <div class="carousel-wrapper">
+                <div class="carousel-container">
+                    <!-- Slide 00 - Punto Cero -->
+                    <div class="carousel-slide active">
+                        <a href="https://maralagoporcada.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
+                            <div class="card-num">00</div>
+                            <h3 class="card-title" data-es="Punto Cero" data-en="Point Zero">Punto Cero</h3>
+                            <p class="card-desc" data-es="Nuestra meta: Crear el Mar a Lago del Siglo XXI." data-en="Our goal: To create the 21st Century Mar-a-Lago.">Nuestra meta: Crear el Mar a Lago del Siglo XXI.</p>
+                            <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                        </a>
+                    </div>
+
+                    <!-- Slide 01 -->
+                    <div class="carousel-slide">
+                        <a href="https://marketingporcada.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
+                            <div class="card-num">01</div>
+                            <h3 class="card-title" data-es="Marketing" data-en="Marketing">Marketing</h3>
+                            <p class="card-desc" data-es="Estrategia, visión y posicionamiento de marca del proyecto." data-en="Project strategy, vision and brand positioning.">Estrategia, visión y posicionamiento de marca del proyecto.</p>
+                            <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                        </a>
+                    </div>
+
+                    <!-- Slide 02 -->
+                    <div class="carousel-slide">
+                        <a href="https://competenciainternacional.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
+                            <div class="card-num">02</div>
+                            <h3 class="card-title" data-es="Competencia" data-en="Competition">Competencia</h3>
+                            <p class="card-desc" data-es="Análisis de mercado, entorno regional y benchmarking." data-en="Market analysis, regional environment and benchmarking.">Análisis de mercado, entorno regional y benchmarking.</p>
+                            <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                        </a>
+                    </div>
+
+                    <!-- Slide 03 -->
+                    <div class="carousel-slide">
+                        <a href="https://roeampliada.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
+                            <div class="card-num">03</div>
+                            <h3 class="card-title" data-es="ROE Ampliada" data-en="Extended ROE">ROE Ampliada</h3>
+                            <p class="card-desc" data-es="Estructura financiera, OPEX y retorno de inversión detallado." data-en="Financial structure, OPEX and detailed return on investment.">Estructura financiera, OPEX y retorno de inversión detallado.</p>
+                            <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                        </a>
+                    </div>
+
+                    <!-- Slide 04 -->
+                    <div class="carousel-slide">
+                        <a href="https://capexporcada.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
+                            <div class="card-num">04</div>
+                            <h3 class="card-title" data-es="CAPEX" data-en="CAPEX">CAPEX</h3>
+                            <p class="card-desc" data-es="Inversión, costes de construcción e ingeniería sísmica del proyecto." data-en="Investment, construction costs and seismic engineering of the project.">Inversión, costes de construcción e ingeniería sísmica del proyecto.</p>
+                            <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                        </a>
+                    </div>
+
+                    <!-- Slide 05 -->
+                    <div class="carousel-slide">
+                        <a href="https://villazeroporcada.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
+                            <div class="card-num">05</div>
+                            <h3 class="card-title" data-es="Villa Cero" data-en="Villa Zero">Villa Cero</h3>
+                            <p class="card-desc" data-es="Presentación de la villa que vamos a comercializar." data-en="Presentation of the villa to be commercialized.">Presentación de la villa que vamos a comercializar.</p>
+                            <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                        </a>
+                    </div>
+
+                    <!-- Slide 06 -->
+                    <div class="carousel-slide">
+                        <a href="https://miceporcada.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
+                            <div class="card-num">06</div>
+                            <h3 class="card-title" data-es="MICE La Porcada" data-en="MICE La Porcada">MICE La Porcada</h3>
+                            <p class="card-desc" data-es="Estrategia para eventos corporativos, convenciones y turismo de reuniones." data-en="Strategy for corporate events, conventions and meetings tourism.">Estrategia para eventos corporativos, convenciones y turismo de reuniones.</p>
+                            <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                        </a>
+                    </div>
+
+                    <!-- Slide 07 -->
+                    <div class="carousel-slide">
+                        <a href="https://porcadaacuatica.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
+                            <div class="card-num">07</div>
+                            <h3 class="card-title" data-es="Porcada Acuática" data-en="Aquatic Revenues">Porcada Acuática</h3>
+                            <p class="card-desc" data-es="Ingresos por explotación de deportes acuáticos y náuticos premium, complementando la facturación hotelera con experiencias exclusivas en el océano." data-en="Revenues from premium water sports and nautical operations, complementing hotel billing with exclusive ocean experiences.">Ingresos por explotación de deportes acuáticos y náuticos premium, complementando la facturación hotelera con experiencias exclusivas en el océano.</p>
+                            <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                        </a>
+                    </div>
+
+                    <!-- Slide 08 -->
+                    <div class="carousel-slide">
+                        <a href="https://generadorporcada.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
+                            <div class="card-num">08</div>
+                            <h3 class="card-title" data-es="Generador" data-en="Generator">Generador</h3>
+                            <p class="card-desc" data-es="Herramienta para la generación de propuestas y simulaciones del proyecto." data-en="Tool for generating project proposals and simulations.">Herramienta para la generación de propuestas y simulaciones del proyecto.</p>
+                            <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                        </a>
+                    </div>
+
+                    <!-- Slide 09 - Explotación Casino (NUEVO) -->
+                    <div class="carousel-slide">
+                        <a href="https://explocasino.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
+                            <div class="card-num">09</div>
+                            <h3 class="card-title" data-es="Explotación Casino" data-en="Casino Operations">Explotación Casino</h3>
+                            <p class="card-desc" data-es="Modelo de operación del casino privado: Yield Management de banca privada, circuito de élite y flujo de 10 días al 100% de ocupación." data-en="Private casino operation model: private-banking Yield Management, elite circuit and 10-day flow at 100% occupancy.">Modelo de operación del casino privado: Yield Management de banca privada, circuito de élite y flujo de 10 días al 100% de ocupación.</p>
+                            <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                        </a>
+                    </div>
+
+                    <!-- Slide 10 - OASIS Super-Villa (FLAGSHIP) -->
+                    <div class="carousel-slide">
+                        <a href="https://villasoasis.netlify.app/" class="link-card is-super-premium" target="_blank" rel="noopener noreferrer">
+                            <div class="card-badge" data-es="Super Premium" data-en="Super Premium">Super Premium</div>
+                            <div class="card-num">10</div>
+                            <h3 class="card-title" data-es="OASIS · La Super-Villa" data-en="OASIS · The Super-Villa">OASIS · La Super-Villa</h3>
+                            <p class="card-desc" data-es="La joya de la corona: super-villas privadas de USD 70–100M, 5.000 m² a pie de playa, marina privada entre manglares (1 de 1), autosuficiencia total, Centro Suizo de Longevidad y membresía SuperLegends. Dirección Denniston. Sin condominio. Sin vecinos. Máxima confidencialidad." data-en="The crown jewel: private super-villas of USD 70–100M, 5,000 m² beachfront, private marina among mangroves (1 of 1), full self-sufficiency, Swiss Longevity Center and SuperLegends membership. Denniston direction. No condominium. No neighbours. Maximum confidentiality.">La joya de la corona: super-villas privadas de USD 70–100M, 5.000 m² a pie de playa, marina privada entre manglares (1 de 1), autosuficiencia total, Centro Suizo de Longevidad y membresía SuperLegends. Dirección Denniston. Sin condominio. Sin vecinos. Máxima confidencialidad.</p>
+                            <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                        </a>
+                    </div>
+
+                    <!-- Slide 11 - Comparativa vs Islas Secas -->
+                    <div class="carousel-slide">
+                        <a href="https://porcadaislassecas.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
+                            <div class="card-num">11</div>
+                            <h3 class="card-title" data-es="vs Islas Secas" data-en="vs Islas Secas">vs Islas Secas</h3>
+                            <p class="card-desc" data-es="Análisis agresivo del resort Islas Secas (#1 Isla Condé Nast 2026) geográficamente enfrente de La Porcada. Tabla de precios nocturnos USD ($3.5K-111K Secas vs $6.5K-95K Porcada Aman), servicios all-inclusive comparados, 7 diferenciadores clave. Incluye casino Montecarlo del Pacífico como producto único." data-en="Aggressive analysis of Islas Secas resort (#1 Island Condé Nast 2026) geographically in front of La Porcada. Nightly rates table USD ($3.5K-111K Secas vs $6.5K-95K Porcada Aman), all-inclusive services compared, 7 key differentiators. Includes Montecarlo del Pacífico casino as unique product.">Análisis agresivo del resort Islas Secas (#1 Isla Condé Nast 2026) geográficamente enfrente de La Porcada. Tabla de precios nocturnos USD ($3.5K-111K Secas vs $6.5K-95K Porcada Aman), servicios all-inclusive comparados, 7 diferenciadores clave. Incluye casino Montecarlo del Pacífico como producto único.</p>
+                            <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                        </a>
+                    </div>
+
+                    <!-- Slide 12 - Comparativa vs Plan Perlas -->
+                    <div class="carousel-slide">
+                        <a href="https://porcada-vs-perlas.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
+                            <div class="card-num">12</div>
+                            <h3 class="card-title" data-es="vs Plan Perlas" data-en="vs Pearl Islands Plan">vs Plan Perlas</h3>
+                            <p class="card-desc" data-es="Análisis comparativo del Ecoresort La Porcada (hotel 100 suites Aman + 50 villas playa + 50 villas sobre-agua + OASIS) frente al Plan Maestro Regional de Las Perlas (Sección 5.6, Tomo II). Contexto, infraestructura y posicionamiento estratégico." data-en="Comparative analysis of La Porcada Ecoresort (100-suite Aman hotel + 50 beachfront villas + 50 over-water villas + OASIS) vs the Pearl Islands Regional Master Plan (Section 5.6, Volume II). Context, infrastructure and strategic positioning.">Análisis comparativo del Ecoresort La Porcada (hotel 100 suites Aman + 50 villas playa + 50 villas sobre-agua + OASIS) frente al Plan Maestro Regional de Las Perlas (Sección 5.6, Tomo II). Contexto, infraestructura y posicionamiento estratégico.</p>
+                            <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                        </a>
+                    </div>
+
+                    <!-- Slide 13 - Aman Resorts -->
+                    <div class="carousel-slide">
+                        <a href="https://amanporcada.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
+                            <div class="card-num">13</div>
+                            <h3 class="card-title" data-es="Aman Resorts" data-en="Aman Resorts">Aman Resorts</h3>
+                            <p class="card-desc" data-es="Por qué Aman Resorts debe ser el explotador del complejo hotelero en la isla." data-en="Why Aman Resorts should be the operator of the hotel complex on the island.">Por qué Aman Resorts debe ser el explotador del complejo hotelero en la isla.</p>
+                            <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                        </a>
+                    </div>
+
+                    <!-- Slide 14 - Activa Panamá -->
+                    <div class="carousel-slide">
+                        <a href="https://activapanama.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
+                            <div class="card-num">14</div>
+                            <h3 class="card-title" data-es="Activa Panamá" data-en="Activa Panama">Activa Panamá</h3>
+                            <p class="card-desc" data-es="Licencias, permisología e ingeniería local panameña. Supervisión de Denniston y control total del proyecto por Grupo Capitol." data-en="Licenses, permits, and Panamanian local engineering. Supervised by Denniston with total project control by Grupo Capitol.">Licencias, permisología e ingeniería local panameña. Supervisión de Denniston y control total del proyecto por Grupo Capitol.</p>
+                            <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                        </a>
+                    </div>
+
+                    <!-- Slide 15 - Shima Constructions -->
+                    <div class="carousel-slide">
+                        <a href="https://shimawebnew.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
+                            <div class="card-num">15</div>
+                            <h3 class="card-title" data-es="Shima Constructions" data-en="Shima Constructions">Shima Constructions</h3>
+                            <p class="card-desc" data-es="Constructora de Propfastinvest Group en Panamá. Aportan el sistema estructural CLT, acero galvanizado y epoxy con máxima agilidad fiscal." data-en="Construction arm of Propfastinvest Group in Panama. Supplying CLT structural system, galvanized steel, and epoxy with maximum tax agility.">Constructora de Propfastinvest Group en Panamá. Aportan el sistema estructural CLT, acero galvanizado y epoxy con máxima agilidad fiscal.</p>
+                            <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                        </a>
+                    </div>
+
+                    <!-- Slide 16 - Legado Familiar -->
+                    <div class="carousel-slide">
+                        <a href="https://webtakinves.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
+                            <div class="card-num">16</div>
+                            <h3 class="card-title" data-es="Legado Familiar" data-en="Family Legacy">Legado Familiar</h3>
+                            <p class="card-desc" data-es="Takyma S.A. estructura el capital norteamericano con beneficios fiscales. Sin estrategia de salida: los inversores somos los desarrolladores de nuestro propio legado." data-en="Takyma Corp. structures US capital with tax benefits. No exit strategy: the investors are the developers of our own legacy.">Takyma S.A. estructura el capital norteamericano con beneficios fiscales. Sin estrategia de salida: los inversores somos los desarrolladores de nuestro propio legado.</p>
+                            <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                        </a>
+                    </div>
+
+                    <!-- Slide 17 - Comparativa Chiriquí -->
+                    <div class="carousel-slide">
+                        <a href="https://proyectoschiriqui26.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
+                            <div class="card-num">17</div>
+                            <h3 class="card-title" data-es="Comparativa Chiriquí" data-en="Chiriquí Benchmark">Comparativa Chiriquí</h3>
+                            <p class="card-desc" data-es="Capítulo 14: Comparativa del Ecoresort La Porcada frente a los 17 principales proyectos e infraestructuras en ejecución en la Provincia de Chiriquí. Inversión privada USD 680,78M, infraestructura, hospital, villa staff y creación de 1.750–2.000 empleos fijos directos." data-en="Chapter 14: Benchmark of La Porcada Ecoresort against the 17 main projects and infrastructures underway in the Province of Chiriquí. Private investment USD 680.78M, infrastructure, hospital, staff villa and the creation of 1,750–2,000 direct permanent jobs.">Capítulo 14: Comparativa del Ecoresort La Porcada frente a los 17 principales proyectos e infraestructuras en ejecución en la Provincia de Chiriquí. Inversión privada USD 680,78M, infraestructura, hospital, villa staff y creación de 1.750–2.000 empleos fijos directos.</p>
+                            <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                        </a>
+                    </div>
+
+                    <!-- Slide 18 - Senderos La Porcada -->
+                    <div class="carousel-slide">
+                        <a href="https://senderosporcada.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
+                            <div class="card-num">18</div>
+                            <h3 class="card-title" data-es="Senderos La Porcada" data-en="La Porcada Trails">Senderos La Porcada</h3>
+                            <p class="card-desc" data-es="Cuaderno de excursiones del entorno natural de La Porcada. Recorrido visual por los senderos y el ecosistema de la isla, para que el inversor conozca directamente el activo natural que respalda el proyecto." data-en="Field notebook of La Porcada's natural environment. Visual journey through the trails and island ecosystem, so the investor can directly know the natural asset backing the project.">Cuaderno de excursiones del entorno natural de La Porcada. Recorrido visual por los senderos y el ecosistema de la isla, para que el inversor conozca directamente el activo natural que respalda el proyecto.</p>
+                            <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                        </a>
+                    </div>
+
+                    <button class="carousel-btn prev" onclick="moveSlide(-1)">&#10094;</button>
+                    <button class="carousel-btn next" onclick="moveSlide(1)">&#10095;</button>
+                </div>
+
+                <div class="carousel-dots">
+                    <span class="dot active" onclick="currentSlide(0)"></span>
+                    <span class="dot" onclick="currentSlide(1)"></span>
+                    <span class="dot" onclick="currentSlide(2)"></span>
+                    <span class="dot" onclick="currentSlide(3)"></span>
+                    <span class="dot" onclick="currentSlide(4)"></span>
+                    <span class="dot" onclick="currentSlide(5)"></span>
+                    <span class="dot" onclick="currentSlide(6)"></span>
+                    <span class="dot" onclick="currentSlide(7)"></span>
+                    <span class="dot" onclick="currentSlide(8)"></span>
+                    <span class="dot" onclick="currentSlide(9)"></span>
+                    <span class="dot" onclick="currentSlide(10)"></span>
+                    <span class="dot" onclick="currentSlide(11)"></span>
+                    <span class="dot" onclick="currentSlide(12)"></span>
+                    <span class="dot" onclick="currentSlide(13)"></span>
+                    <span class="dot" onclick="currentSlide(14)"></span>
+                    <span class="dot" onclick="currentSlide(15)"></span>
+                    <span class="dot" onclick="currentSlide(16)"></span>
+                    <span class="dot" onclick="currentSlide(17)"></span>
+                    <span class="dot" onclick="currentSlide(18)"></span>
+                </div>
+            </div>
+
+            <!-- SECCIÓN DE VIDEOS FINALES -->
+            <div class="video-section">
+                <h2 class="video-title" data-es="La Visión en Imagen" data-en="The Vision in Images">La Visión en Imagen</h2>
+                <div class="video-container">
+                    <video class="promo-video" autoplay loop muted playsinline>
+                        <source src="video/NEWPORCADA.MP4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <p class="video-desc" data-es="Serenidad, confidencialidad y naturaleza casada con el lujo. Una experiencia visual del futuro del Pacífico." data-en="Serenity, confidentiality, and nature paired with luxury. A visual experience of the future of the Pacific.">Serenidad, confidencialidad y naturaleza casada con el lujo. Una experiencia visual del futuro del Pacífico.</p>
+
+                <!-- VIDEO REAL DESCARGADO DE YOUTUBE -->
+                <h2 class="video-title" data-es="La Porcada en la Realidad" data-en="La Porcada in Reality">La Porcada en la Realidad</h2>
+                <div class="video-container">
+                    <video class="promo-video" autoplay loop muted playsinline>
+                        <!-- AQUÍ PONES EL NOMBRE DEL ARCHIVO QUE DESCARGUES -->
+                        <source src="video/REALPORCADA.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <p class="video-desc" data-es="Un vistazo aéreo y real de la joya del Pacífico panameño." data-en="A real and aerial glimpse of the jewel of the Panamanian Pacific.">Un vistazo aéreo y real de la joya del Pacífico panameño.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <img src="images/ECO.PNG" alt="EcoResort Logo" class="eco-logo" onerror="this.style.display='none';">
+        <p>© 2026 <strong>EcoResort La Porcada</strong> by <strong>Takyma Investment Pioneer</strong></p>
+    </footer>
+
+    <!-- ============================================
+         OVERLAY CINEMATOGRÁFICO DE LOS MANGLARES
+         Se activa tras inactividad en el slide 13 (Legado)
+         ============================================ -->
+    <div class="manglar-overlay" id="manglarOverlay">
+        <video class="manglar-video" id="manglarVideo" muted playsinline preload="auto">
+            <source src="video/porcaday1.mp4" type="video/mp4">
+        </video>
+        <!-- MÚSICA AMBIENTAL: WHEEL OF TIME.MP3 (subido a la raíz del repo) -->
+        <audio id="manglarAudio" loop preload="auto">
+            <source src="WHEEL%20OF%20TIME.MP3" type="audio/mpeg">
+        </audio>
+        <div class="manglar-vignette"></div>
+        <div class="manglar-content">
+            <h2 class="manglar-title" data-es="Los Manglares de La Porcada" data-en="The Mangroves of La Porcada">Los Manglares de La Porcada</h2>
+            <div class="manglar-divider"></div>
+            <p class="manglar-subtitle" data-es="Naturaleza intacta en el corazón del Pacífico" data-en="Untouched Nature in the Heart of the Pacific">Naturaleza intacta en el corazón del Pacífico</p>
+        </div>
+        <div class="manglar-counter" data-es="Cierre Cinematográfico &middot; La Porcada" data-en="Cinematic Closing &middot; La Porcada">Cierre Cinematográfico &middot; La Porcada</div>
+        <button class="manglar-skip" onclick="skipManglar()" data-es="Saltar &rarr;" data-en="Skip &rarr;">Saltar &rarr;</button>
+    </div>
+
+    <script>
+        // LÓGICA DE CONTRASEÑA
+        function checkPassword(event) {
+            event.preventDefault(); // Evita que el formulario recargue la página
+            const password = document.getElementById('passInput').value;
+            const errorMsg = document.getElementById('errorMsg');
+            const lockScreen = document.getElementById('lockScreen');
+            const dashboard = document.getElementById('dashboard');
+            const form = document.querySelector('.access-form');
+
+            if (password === 'TAKYMA2026') {
+                lockScreen.style.display = 'none';
+                dashboard.style.display = 'flex';
+                startAutoSlide(); // Inicia el carrusel automáticamente al desbloquear
+            } else {
+                // Mensaje de error bilingüe según el idioma actual
+                errorMsg.innerText = currentLang === 'ES' ? 'Clave incorrecta. Acceso denegado.' : 'Incorrect key. Access denied.';
+                form.classList.add('shake'); // Añade animación de temblor
+                setTimeout(() => form.classList.remove('shake'), 300);
+            }
+        }
+
+        // LÓGICA DEL CARRUSEL
+        let slideIndex = 0;
+        let autoSlideInterval;
+
+        function showSlide(index) {
+            const slides = document.querySelectorAll('.carousel-slide');
+            const dots = document.querySelectorAll('.dot');
+
+            if (index >= slides.length) slideIndex = 0;
+            if (index < 0) slideIndex = slides.length - 1;
+
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            slides[slideIndex].classList.add('active');
+            dots[slideIndex].classList.add('active');
+
+            // === CLAVE: Al llegar al slide 13 (Legado), DETENEMOS el carrusel ===
+            // para que no siga avanzando y el timer de inactividad pueda disparar el manglar.
+            if (slideIndex === FINAL_SLIDE_INDEX && isDashboardVisible() && !manglarShown && !manglarClosing) {
+                clearInterval(autoSlideInterval);
+                autoSlideInterval = null;
+                startManglarCountdown();
+            } else {
+                clearManglarCountdown();
+            }
+        }
+
+        function moveSlide(step) {
+            slideIndex += step;
+            showSlide(slideIndex);
+            resetAutoSlide();
+            resetManglarInactivity(); // actividad del usuario
+        }
+
+        function currentSlide(index) {
+            slideIndex = index;
+            showSlide(slideIndex);
+            resetAutoSlide();
+            resetManglarInactivity(); // actividad del usuario
+        }
+
+        function startAutoSlide() {
+            autoSlideInterval = setInterval(() => {
+                slideIndex++;
+                showSlide(slideIndex);
+            }, 6000); // 6 segundos por slide
+        }
+
+        function resetAutoSlide() {
+            clearInterval(autoSlideInterval);
+            startAutoSlide();
+        }
+
+        // LÓGICA DE CAMBIO DE IDIOMA
+        let currentLang = 'ES';
+        function toggleLanguage() {
+            currentLang = currentLang === 'ES' ? 'EN' : 'ES';
+            
+            const btn = document.getElementById('langBtn');
+            btn.innerText = currentLang === 'ES' ? '🌐 English' : '🌐 Español';
+
+            const elements = document.querySelectorAll('[data-es][data-en]');
+            elements.forEach(el => {
+                el.innerText = currentLang === 'ES' ? el.getAttribute('data-es') : el.getAttribute('data-en');
+            });
+
+            // Actualizar también el subtítulo del manglar (usa innerHTML por &rarr; / &middot;)
+            const mTitle = document.querySelector('.manglar-title');
+            const mSub = document.querySelector('.manglar-subtitle');
+            const mCount = document.querySelector('.manglar-counter');
+            const mSkip = document.querySelector('.manglar-skip');
+            if (mTitle) mTitle.innerHTML = currentLang === 'ES' ? mTitle.getAttribute('data-es') : mTitle.getAttribute('data-en');
+            if (mSub)   mSub.innerHTML   = currentLang === 'ES' ? mSub.getAttribute('data-es')   : mSub.getAttribute('data-en');
+            if (mCount) mCount.innerHTML = currentLang === 'ES' ? mCount.getAttribute('data-es') : mCount.getAttribute('data-en');
+            if (mSkip)  mSkip.innerHTML  = currentLang === 'ES' ? mSkip.getAttribute('data-es')  : mSkip.getAttribute('data-en');
+        }
+
+        /* ============================================
+           OVERLAY CINEMATOGRÁFICO DE LOS MANGLARES
+           Se activa tras 5s de inactividad en slide 18 (último)
+           ============================================ */
+        const FINAL_SLIDE_INDEX = 18;
+        const MANGLAR_INACTIVITY_MS = 5000; // 5 segundos sin actividad
+        let manglarShown = false;
+        let manglarTimer = null;
+        let manglarClosing = false;
+
+        function isDashboardVisible() {
+            return document.getElementById('dashboard').style.display === 'flex';
+        }
+
+        // Llamado desde showSlide cada vez que cambia el slide
+        function checkManglarTrigger() {
+            // Solo activar timer si: estamos en slide 13 + dashboard visible + no se mostró aún
+            if (slideIndex === FINAL_SLIDE_INDEX && isDashboardVisible() && !manglarShown && !manglarClosing) {
+                startManglarCountdown();
+            } else {
+                clearManglarCountdown();
+            }
+        }
+
+        function startManglarCountdown() {
+            clearManglarCountdown();
+            manglarTimer = setTimeout(launchManglar, MANGLAR_INACTIVITY_MS);
+        }
+
+        function clearManglarCountdown() {
+            if (manglarTimer) {
+                clearTimeout(manglarTimer);
+                manglarTimer = null;
+            }
+        }
+
+        // Cualquier actividad del usuario reinicia el contador (si estamos en slide 13)
+        function resetManglarInactivity() {
+            if (slideIndex === FINAL_SLIDE_INDEX && isDashboardVisible() && !manglarShown && !manglarClosing) {
+                startManglarCountdown();
+            }
+        }
+
+        // Listener global: clicks en enlaces, scroll, teclas → reinicia timer
+        document.addEventListener('click', function(e) {
+            // Si el click es dentro del overlay del manglar, no hacer nada aquí
+            if (e.target.closest('.manglar-overlay')) return;
+            resetManglarInactivity();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && manglarShown) {
+                skipManglar();
+            } else {
+                resetManglarInactivity();
+            }
+        });
+
+        document.addEventListener('scroll', resetManglarInactivity, { passive: true });
+        // NOTA: No detectamos mousemove para no resetear el contador constantemente.
+        // Solo clicks, scroll y teclas cuentan como actividad.
+
+        function launchManglar() {
+            if (manglarShown || manglarClosing) return;
+            manglarShown = true;
+            clearManglarCountdown();
+
+            // Pausar el carrusel automático para que no siga avanzando
+            clearInterval(autoSlideInterval);
+
+            const overlay = document.getElementById('manglarOverlay');
+            const video = document.getElementById('manglarVideo');
+            const audio = document.getElementById('manglarAudio');
+
+            // Mostrar overlay con fader
+            overlay.classList.add('visible');
+
+            // Reproducir el video tras el fader de entrada
+            setTimeout(() => {
+                const playPromise = video.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(err => {
+                        console.log('Autoplay bloqueado, reintentando con muted:', err);
+                        video.muted = true;
+                        video.play().catch(() => {});
+                    });
+                }
+
+                // === MÚSICA AMBIENTAL con fade-in suave ===
+                if (audio) {
+                    audio.volume = 0; // Empezar en silencio
+                    audio.currentTime = 0;
+                    const audioPromise = audio.play();
+                    if (audioPromise !== undefined) {
+                        audioPromise.then(() => {
+                            // Fade-in: subir volumen de 0 a 0.7 en 2.5 segundos
+                            fadeAudio(audio, 0, 0.7, 2500);
+                        }).catch(err => {
+                            console.log('Audio autoplay bloqueado:', err);
+                            // Reintentar una vez más tras 200ms (a veces el navegador necesita un ciclo más)
+                            setTimeout(() => {
+                                audio.play().then(() => {
+                                    fadeAudio(audio, 0, 0.7, 2500);
+                                }).catch(() => {});
+                            }, 200);
+                        });
+                    }
+                }
+            }, 1000);
+
+            // Cuando termine el video, cerrar automáticamente
+            video.addEventListener('ended', closeManglar);
+        }
+
+        // Función auxiliar para hacer fade del audio
+        function fadeAudio(audioEl, fromVol, toVol, durationMs) {
+            const steps = 20;
+            const stepDuration = durationMs / steps;
+            const volumeStep = (toVol - fromVol) / steps;
+            let currentStep = 0;
+
+            const fadeInterval = setInterval(() => {
+                currentStep++;
+                const newVol = fromVol + (volumeStep * currentStep);
+                try {
+                    audioEl.volume = Math.max(0, Math.min(1, newVol));
+                } catch(e) {}
+
+                if (currentStep >= steps) {
+                    clearInterval(fadeInterval);
+                    try { audioEl.volume = toVol; } catch(e) {}
+                }
+            }, stepDuration);
+
+            return fadeInterval; // por si se quiere cancelar
+        }
+
+        function closeManglar() {
+            if (manglarClosing) return;
+            manglarClosing = true;
+
+            const overlay = document.getElementById('manglarOverlay');
+            const video = document.getElementById('manglarVideo');
+            const audio = document.getElementById('manglarAudio');
+
+            overlay.classList.add('closing');
+
+            // === MÚSICA AMBIENTAL: fade-out suave antes de parar ===
+            if (audio && !audio.paused) {
+                const currentVol = audio.volume;
+                fadeAudio(audio, currentVol, 0, 1400);
+            }
+
+            setTimeout(() => {
+                overlay.classList.remove('visible', 'closing');
+                video.pause();
+                try { video.currentTime = 0; } catch(e) {}
+                if (audio) {
+                    audio.pause();
+                    try { audio.currentTime = 0; } catch(e) {}
+                    audio.volume = 0.7; // Restaurar volumen para próxima reproducción
+                }
+                manglarClosing = false;
+                // Permitir que se vuelva a mostrar si vuelve al slide 13
+                manglarShown = false;
+                // Reanudar el carrusel
+                if (isDashboardVisible()) {
+                    resetAutoSlide();
+                    checkManglarTrigger();
+                }
+            }, 1400);
+        }
+
+        function skipManglar() {
+            closeManglar();
+        }
+
+        // Exponer en window para los handlers inline
+        window.skipManglar = skipManglar;
+    </script>
+</body>
+</html>
