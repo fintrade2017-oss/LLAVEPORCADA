@@ -215,7 +215,7 @@
 
         header {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
         }
 
         header h1 {
@@ -236,6 +236,24 @@
             letter-spacing: 3px;
             text-transform: uppercase;
             font-size: 0.9rem;
+        }
+
+        /* --- CATEGORÍA DINÁMICA --- */
+        .category-header {
+            text-align: center;
+            margin-bottom: 25px;
+            min-height: 40px;
+        }
+        .category-title {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            color: var(--color-primary-bright);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--color-border);
+            display: inline-block;
+            padding-bottom: 8px;
+            transition: opacity 0.4s ease;
         }
 
         /* --- ESTILOS DEL CARRUSEL DE ENLACES --- */
@@ -388,13 +406,18 @@
         .carousel-dots {
             text-align: center;
             padding-top: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            flex-wrap: wrap;
         }
 
         .dot {
             cursor: pointer;
             height: 4px;
-            width: 25px;
-            margin: 0 5px;
+            width: 20px;
+            margin: 0 2px;
             background-color: rgba(255,255,255,0.2);
             display: inline-block;
             transition: all 0.4s ease;
@@ -402,7 +425,14 @@
 
         .dot.active, .dot:hover {
             background-color: var(--color-primary);
-            width: 35px;
+            width: 30px;
+        }
+
+        .dot-separator {
+            width: 1px;
+            height: 12px;
+            background-color: rgba(255,255,255,0.2);
+            margin: 0 8px;
         }
 
         /* --- ESTILOS DE LOS VIDEOS FINALES --- */
@@ -430,7 +460,7 @@
             overflow: hidden;
             box-shadow: 0 15px 40px rgba(0,0,0,0.6);
             background: #000;
-            margin-bottom: 60px; /* Espacio entre el video 1 y el 2 */
+            margin-bottom: 60px;
         }
 
         .promo-video {
@@ -446,7 +476,7 @@
             margin-bottom: 20px;
         }
 
-        /* SUPER PREMIUM CARD (OASIS) */
+        /* SUPER PREMIUM CARD */
         .link-card.is-super-premium {
             background: linear-gradient(135deg, #1a1a1e 0%, #2a2419 50%, #1a1a1e 100%);
             border: 1px solid rgba(212, 180, 131, 0.5);
@@ -455,26 +485,18 @@
         .link-card.is-super-premium::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
             background: radial-gradient(circle at center, rgba(212, 180, 131, 0.12) 0%, transparent 60%);
             pointer-events: none;
             z-index: 0;
         }
-        .link-card.is-super-premium > * {
-            position: relative;
-            z-index: 1;
-        }
+        .link-card.is-super-premium > * { position: relative; z-index: 1; }
         .link-card.is-super-premium .card-num {
             color: var(--color-primary-bright);
             opacity: 0.5;
             text-shadow: 0 0 20px rgba(212, 180, 131, 0.4);
         }
-        .link-card.is-super-premium .card-title {
-            text-shadow: 0 0 24px rgba(212, 180, 131, 0.35);
-        }
+        .link-card.is-super-premium .card-title { text-shadow: 0 0 24px rgba(212, 180, 131, 0.35); }
         .link-card.is-super-premium .card-btn {
             background: linear-gradient(135deg, rgba(212, 180, 131, 0.15), rgba(212, 180, 131, 0.05));
             border-color: var(--color-primary-bright);
@@ -483,10 +505,7 @@
             padding: 14px 36px;
             letter-spacing: 3px;
         }
-        .link-card.is-super-premium .card-btn::before {
-            content: '◆ ';
-            margin-right: 8px;
-        }
+        .link-card.is-super-premium .card-btn::before { content: '◆ '; margin-right: 8px; }
         .link-card.is-super-premium:hover {
             background: linear-gradient(135deg, #2a2419 0%, #3a3225 50%, #1a1a1e 100%);
             border-color: var(--color-primary-bright);
@@ -499,9 +518,7 @@
             text-shadow: none;
         }
         .card-badge {
-            position: absolute;
-            top: 20px;
-            right: 20px;
+            position: absolute; top: 20px; right: 20px;
             padding: 6px 14px;
             background: linear-gradient(135deg, var(--color-primary), var(--color-primary-bright));
             color: #0c0c0d;
@@ -512,18 +529,10 @@
             text-transform: uppercase;
             z-index: 2;
             box-shadow: 0 4px 15px rgba(212, 180, 131, 0.4);
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            display: flex; align-items: center; gap: 6px;
         }
-        .card-badge::before {
-            content: '◆';
-            font-size: 0.55rem;
-        }
-        .card-badge::after {
-            content: '◆';
-            font-size: 0.55rem;
-        }
+        .card-badge::before { content: '◆'; font-size: 0.55rem; }
+        .card-badge::after { content: '◆'; font-size: 0.55rem; }
 
         /* Footer */
         footer {
@@ -543,10 +552,7 @@
             gap: 10px;
         }
 
-        footer strong {
-            color: var(--color-primary);
-            font-weight: 500;
-        }
+        footer strong { color: var(--color-primary); font-weight: 500; }
 
         .eco-logo {
             max-height: 40px;
@@ -558,27 +564,22 @@
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
-
-        /* Shake animation for wrong password */
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
             25% { transform: translateX(5px); }
             75% { transform: translateX(-5px); }
         }
-
-        .shake {
-            animation: shake 0.3s ease-in-out;
-        }
+        .shake { animation: shake 0.3s ease-in-out; }
 
         @media (max-width: 768px) {
             header h1 { font-size: 2.5rem; }
             .lock-title { font-size: 2rem; }
             .card-title { font-size: 1.8rem; }
+            .category-title { font-size: 1.4rem; }
             .carousel-btn.prev { left: 10px; }
             .carousel-btn.next { right: 10px; }
             .carousel-container { height: 400px; }
@@ -588,151 +589,71 @@
             .manglar-skip { bottom: 20px; right: 20px; padding: 10px 20px; }
         }
 
-        /* ============================================
-           OVERLAY CINEMATOGRÁFICO DE LOS MANGLARES
-           Se lanza tras inactividad en el slide 13
-           ============================================ */
+        /* OVERLAY CINEMATOGRÁFICO DE LOS MANGLARES */
         .manglar-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: #000;
-            z-index: 9998;
-            opacity: 0;
-            visibility: hidden;
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: #000; z-index: 9998;
+            opacity: 0; visibility: hidden;
             transition: opacity 1.4s ease, visibility 1.4s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
+            display: flex; align-items: center; justify-content: center; overflow: hidden;
         }
-
-        .manglar-overlay.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .manglar-overlay.closing {
-            opacity: 0;
-        }
-
+        .manglar-overlay.visible { opacity: 1; visibility: visible; }
+        .manglar-overlay.closing { opacity: 0; }
         .manglar-video {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            min-width: 100%; min-height: 100%; width: auto; height: auto;
             object-fit: cover;
             filter: brightness(0.88) contrast(1.08) saturate(1.15);
         }
-
         .manglar-vignette {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background:
-                radial-gradient(ellipse at center, transparent 25%, rgba(0,0,0,0.55) 100%),
-                linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, transparent 28%, transparent 60%, rgba(0,0,0,0.9) 100%);
-            pointer-events: none;
-            z-index: 2;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(ellipse at center, transparent 25%, rgba(0,0,0,0.55) 100%),
+                        linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, transparent 28%, transparent 60%, rgba(0,0,0,0.9) 100%);
+            pointer-events: none; z-index: 2;
         }
-
-        .manglar-content {
-            position: relative;
-            z-index: 3;
-            text-align: center;
-            padding: 40px;
-            max-width: 800px;
-        }
-
+        .manglar-content { position: relative; z-index: 3; text-align: center; padding: 40px; max-width: 800px; }
         .manglar-title {
-            font-family: var(--font-serif);
-            font-size: 2.8rem;
-            color: var(--color-primary-bright);
-            letter-spacing: 6px;
-            text-transform: uppercase;
-            text-shadow: 0 4px 24px rgba(0,0,0,0.95);
-            margin: 0 0 14px 0;
-            font-weight: 400;
-            opacity: 0;
-            transform: translateY(15px);
+            font-family: var(--font-serif); font-size: 2.8rem;
+            color: var(--color-primary-bright); letter-spacing: 6px;
+            text-transform: uppercase; text-shadow: 0 4px 24px rgba(0,0,0,0.95);
+            margin: 0 0 14px 0; font-weight: 400;
+            opacity: 0; transform: translateY(15px);
             animation: manglar-text-in 2.2s cubic-bezier(0.22, 1, 0.36, 1) 1.2s forwards;
         }
-
         .manglar-subtitle {
-            font-family: var(--font-serif);
-            font-style: italic;
-            font-size: 1.2rem;
-            color: rgba(255,255,255,0.92);
-            letter-spacing: 4px;
+            font-family: var(--font-serif); font-style: italic; font-size: 1.2rem;
+            color: rgba(255,255,255,0.92); letter-spacing: 4px;
             text-shadow: 0 2px 12px rgba(0,0,0,0.95);
-            opacity: 0;
-            transform: translateY(15px);
+            opacity: 0; transform: translateY(15px);
             animation: manglar-text-in 2.2s cubic-bezier(0.22, 1, 0.36, 1) 2.2s forwards;
         }
-
         .manglar-divider {
-            width: 60px;
-            height: 1px;
-            background: var(--color-primary);
-            margin: 24px auto;
-            opacity: 0;
-            animation: manglar-text-in 1.8s ease-out 1.8s forwards;
+            width: 60px; height: 1px; background: var(--color-primary); margin: 24px auto;
+            opacity: 0; animation: manglar-text-in 1.8s ease-out 1.8s forwards;
         }
-
         .manglar-skip {
-            position: absolute;
-            bottom: 30px;
-            right: 30px;
-            z-index: 4;
-            background: transparent;
-            border: 1px solid rgba(255,255,255,0.3);
-            color: rgba(255,255,255,0.7);
-            padding: 12px 28px;
-            font-family: var(--font-sans);
-            font-size: 0.7rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            position: absolute; bottom: 30px; right: 30px; z-index: 4;
+            background: transparent; border: 1px solid rgba(255,255,255,0.3);
+            color: rgba(255,255,255,0.7); padding: 12px 28px;
+            font-family: var(--font-sans); font-size: 0.7rem; letter-spacing: 3px;
+            text-transform: uppercase; cursor: pointer; transition: all 0.3s ease;
             backdrop-filter: blur(4px);
-            opacity: 0;
-            animation: manglar-text-in 1s ease-out 3s forwards;
+            opacity: 0; animation: manglar-text-in 1s ease-out 3s forwards;
         }
-
         .manglar-skip:hover {
-            background: rgba(255,255,255,0.08);
-            border-color: var(--color-primary);
-            color: var(--color-primary-bright);
-            letter-spacing: 4px;
+            background: rgba(255,255,255,0.08); border-color: var(--color-primary);
+            color: var(--color-primary-bright); letter-spacing: 4px;
         }
-
         .manglar-counter {
-            position: absolute;
-            top: 30px;
-            left: 30px;
-            z-index: 4;
-            color: rgba(255,255,255,0.5);
-            font-family: var(--font-sans);
-            font-size: 0.7rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            opacity: 0;
-            animation: manglar-text-in 1s ease-out 3s forwards;
+            position: absolute; top: 30px; left: 30px; z-index: 4;
+            color: rgba(255,255,255,0.5); font-family: var(--font-sans);
+            font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase;
+            opacity: 0; animation: manglar-text-in 1s ease-out 3s forwards;
         }
-
         @keyframes manglar-text-in {
-            0%   { opacity: 0; transform: translateY(15px); }
-            100% { opacity: 1; transform: translateY(0);    }
+            0% { opacity: 0; transform: translateY(15px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
-
     </style>
 </head>
 <body>
@@ -766,9 +687,14 @@
                 <h2 data-es="Documentos Corporativos" data-en="Corporate Documents">Documentos Corporativos</h2>
             </header>
 
+            <!-- TÍTULO DE CATEGORÍA DINÁMICO -->
+            <div class="category-header">
+                <div class="category-title" id="categoryTitle">I. Plan de Marketing</div>
+            </div>
+
             <div class="carousel-wrapper">
                 <div class="carousel-container">
-                    <!-- Slide 00 - Punto Cero -->
+                    <!-- ================= BLOQUE 1: PLAN DE MARKETING (00-06) ================= -->
                     <div class="carousel-slide active">
                         <a href="https://maralagoporcada.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
                             <div class="card-num">00</div>
@@ -778,7 +704,6 @@
                         </a>
                     </div>
 
-                    <!-- Slide 01 -->
                     <div class="carousel-slide">
                         <a href="https://marketingporcada.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
                             <div class="card-num">01</div>
@@ -788,7 +713,6 @@
                         </a>
                     </div>
 
-                    <!-- Slide 02 -->
                     <div class="carousel-slide">
                         <a href="https://competenciainternacional.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
                             <div class="card-num">02</div>
@@ -798,7 +722,6 @@
                         </a>
                     </div>
 
-                    <!-- Slide 03 -->
                     <div class="carousel-slide">
                         <a href="https://roeampliada.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
                             <div class="card-num">03</div>
@@ -808,7 +731,6 @@
                         </a>
                     </div>
 
-                    <!-- Slide 04 -->
                     <div class="carousel-slide">
                         <a href="https://capexporcada.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
                             <div class="card-num">04</div>
@@ -818,7 +740,6 @@
                         </a>
                     </div>
 
-                    <!-- Slide 05 -->
                     <div class="carousel-slide">
                         <a href="https://villazeroporcada.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
                             <div class="card-num">05</div>
@@ -828,7 +749,6 @@
                         </a>
                     </div>
 
-                    <!-- Slide 06 -->
                     <div class="carousel-slide">
                         <a href="https://miceporcada.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
                             <div class="card-num">06</div>
@@ -838,7 +758,7 @@
                         </a>
                     </div>
 
-                    <!-- Slide 07 -->
+                    <!-- ================= BLOQUE 2: DESARROLLO FINANCIERO (07-10) ================= -->
                     <div class="carousel-slide">
                         <a href="https://porcadaacuatica.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
                             <div class="card-num">07</div>
@@ -848,7 +768,6 @@
                         </a>
                     </div>
 
-                    <!-- Slide 08 -->
                     <div class="carousel-slide">
                         <a href="https://generadorporcada.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
                             <div class="card-num">08</div>
@@ -858,7 +777,6 @@
                         </a>
                     </div>
 
-                    <!-- Slide 09 - Explotación Casino (NUEVO) -->
                     <div class="carousel-slide">
                         <a href="https://explocasino.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
                             <div class="card-num">09</div>
@@ -868,7 +786,6 @@
                         </a>
                     </div>
 
-                    <!-- Slide 10 - OASIS Super-Villa (FLAGSHIP) -->
                     <div class="carousel-slide">
                         <a href="https://villasoasis.netlify.app/" class="link-card is-super-premium" target="_blank" rel="noopener noreferrer">
                             <div class="card-badge" data-es="Super Premium" data-en="Super Premium">Super Premium</div>
@@ -879,7 +796,7 @@
                         </a>
                     </div>
 
-                    <!-- Slide 11 - Comparativa vs Islas Secas -->
+                    <!-- ================= BLOQUE 3: ESTUDIO DE MERCADO (11, 12, 17, 18) ================= -->
                     <div class="carousel-slide">
                         <a href="https://porcadaislassecas.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
                             <div class="card-num">11</div>
@@ -889,7 +806,6 @@
                         </a>
                     </div>
 
-                    <!-- Slide 12 - Comparativa vs Plan Perlas -->
                     <div class="carousel-slide">
                         <a href="https://porcada-vs-perlas.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
                             <div class="card-num">12</div>
@@ -899,47 +815,6 @@
                         </a>
                     </div>
 
-                    <!-- Slide 13 - Aman Resorts -->
-                    <div class="carousel-slide">
-                        <a href="https://amanporcada.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
-                            <div class="card-num">13</div>
-                            <h3 class="card-title" data-es="Aman Resorts" data-en="Aman Resorts">Aman Resorts</h3>
-                            <p class="card-desc" data-es="Por qué Aman Resorts debe ser el explotador del complejo hotelero en la isla." data-en="Why Aman Resorts should be the operator of the hotel complex on the island.">Por qué Aman Resorts debe ser el explotador del complejo hotelero en la isla.</p>
-                            <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
-                        </a>
-                    </div>
-
-                    <!-- Slide 14 - Activa Panamá -->
-                    <div class="carousel-slide">
-                        <a href="https://activapanama.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
-                            <div class="card-num">14</div>
-                            <h3 class="card-title" data-es="Activa Panamá" data-en="Activa Panama">Activa Panamá</h3>
-                            <p class="card-desc" data-es="Licencias, permisología e ingeniería local panameña. Supervisión de Denniston y control total del proyecto por Grupo Capitol." data-en="Licenses, permits, and Panamanian local engineering. Supervised by Denniston with total project control by Grupo Capitol.">Licencias, permisología e ingeniería local panameña. Supervisión de Denniston y control total del proyecto por Grupo Capitol.</p>
-                            <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
-                        </a>
-                    </div>
-
-                    <!-- Slide 15 - Shima Constructions -->
-                    <div class="carousel-slide">
-                        <a href="https://shimawebnew.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
-                            <div class="card-num">15</div>
-                            <h3 class="card-title" data-es="Shima Constructions" data-en="Shima Constructions">Shima Constructions</h3>
-                            <p class="card-desc" data-es="Constructora de Propfastinvest Group en Panamá. Aportan el sistema estructural CLT, acero galvanizado y epoxy con máxima agilidad fiscal." data-en="Construction arm of Propfastinvest Group in Panama. Supplying CLT structural system, galvanized steel, and epoxy with maximum tax agility.">Constructora de Propfastinvest Group en Panamá. Aportan el sistema estructural CLT, acero galvanizado y epoxy con máxima agilidad fiscal.</p>
-                            <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
-                        </a>
-                    </div>
-
-                    <!-- Slide 16 - Legado Familiar -->
-                    <div class="carousel-slide">
-                        <a href="https://webtakinves.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
-                            <div class="card-num">16</div>
-                            <h3 class="card-title" data-es="Legado Familiar" data-en="Family Legacy">Legado Familiar</h3>
-                            <p class="card-desc" data-es="Takyma S.A. estructura el capital norteamericano con beneficios fiscales. Sin estrategia de salida: los inversores somos los desarrolladores de nuestro propio legado." data-en="Takyma Corp. structures US capital with tax benefits. No exit strategy: the investors are the developers of our own legacy.">Takyma S.A. estructura el capital norteamericano con beneficios fiscales. Sin estrategia de salida: los inversores somos los desarrolladores de nuestro propio legado.</p>
-                            <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
-                        </a>
-                    </div>
-
-                    <!-- Slide 17 - Comparativa Chiriquí -->
                     <div class="carousel-slide">
                         <a href="https://proyectoschiriqui26.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
                             <div class="card-num">17</div>
@@ -949,7 +824,6 @@
                         </a>
                     </div>
 
-                    <!-- Slide 18 - Senderos La Porcada -->
                     <div class="carousel-slide">
                         <a href="https://senderosporcada.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
                             <div class="card-num">18</div>
@@ -959,11 +833,50 @@
                         </a>
                     </div>
 
+                    <!-- ================= BLOQUE 4: PROVEEDORES ESPECIALES (13, 14, 15, 16) ================= -->
+                    <div class="carousel-slide">
+                        <a href="https://amanporcada.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
+                            <div class="card-num">13</div>
+                            <h3 class="card-title" data-es="Aman Resorts" data-en="Aman Resorts">Aman Resorts</h3>
+                            <p class="card-desc" data-es="Por qué Aman Resorts debe ser el explotador del complejo hotelero en la isla." data-en="Why Aman Resorts should be the operator of the hotel complex on the island.">Por qué Aman Resorts debe ser el explotador del complejo hotelero en la isla.</p>
+                            <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                        </a>
+                    </div>
+
+                    <div class="carousel-slide">
+                        <a href="https://activapanama.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
+                            <div class="card-num">14</div>
+                            <h3 class="card-title" data-es="Activa Panamá" data-en="Activa Panama">Activa Panamá</h3>
+                            <p class="card-desc" data-es="Licencias, permisología e ingeniería local panameña. Supervisión de Denniston y control total del proyecto por Grupo Capitol." data-en="Licenses, permits, and Panamanian local engineering. Supervised by Denniston with total project control by Grupo Capitol.">Licencias, permisología e ingeniería local panameña. Supervisión de Denniston y control total del proyecto por Grupo Capitol.</p>
+                            <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                        </a>
+                    </div>
+
+                    <div class="carousel-slide">
+                        <a href="https://shimawebnew.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
+                            <div class="card-num">15</div>
+                            <h3 class="card-title" data-es="Shima Constructions" data-en="Shima Constructions">Shima Constructions</h3>
+                            <p class="card-desc" data-es="Constructora de Propfastinvest Group en Panamá. Aportan el sistema estructural CLT, acero galvanizado y epoxy con máxima agilidad fiscal." data-en="Construction arm of Propfastinvest Group in Panama. Supplying CLT structural system, galvanized steel, and epoxy with maximum tax agility.">Constructora de Propfastinvest Group en Panamá. Aportan el sistema estructural CLT, acero galvanizado y epoxy con máxima agilidad fiscal.</p>
+                            <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                        </a>
+                    </div>
+
+                    <div class="carousel-slide">
+                        <a href="https://webtakinves.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
+                            <div class="card-num">16</div>
+                            <h3 class="card-title" data-es="Legado Familiar" data-en="Family Legacy">Legado Familiar</h3>
+                            <p class="card-desc" data-es="Takyma S.A. estructura el capital norteamericano con beneficios fiscales. Sin estrategia de salida: los inversores somos los desarrolladores de nuestro propio legado." data-en="Takyma Corp. structures US capital with tax benefits. No exit strategy: the investors are the developers of our own legacy.">Takyma S.A. estructura el capital norteamericano con beneficios fiscales. Sin estrategia de salida: los inversores somos los desarrolladores de nuestro propio legado.</p>
+                            <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                        </a>
+                    </div>
+
                     <button class="carousel-btn prev" onclick="moveSlide(-1)">&#10094;</button>
                     <button class="carousel-btn next" onclick="moveSlide(1)">&#10095;</button>
                 </div>
 
+                <!-- NAVEGACIÓN AGRUPADA POR BLOQUES -->
                 <div class="carousel-dots">
+                    <!-- Bloque 1 -->
                     <span class="dot active" onclick="currentSlide(0)"></span>
                     <span class="dot" onclick="currentSlide(1)"></span>
                     <span class="dot" onclick="currentSlide(2)"></span>
@@ -971,14 +884,20 @@
                     <span class="dot" onclick="currentSlide(4)"></span>
                     <span class="dot" onclick="currentSlide(5)"></span>
                     <span class="dot" onclick="currentSlide(6)"></span>
+                    <span class="dot-separator"></span>
+                    <!-- Bloque 2 -->
                     <span class="dot" onclick="currentSlide(7)"></span>
                     <span class="dot" onclick="currentSlide(8)"></span>
                     <span class="dot" onclick="currentSlide(9)"></span>
                     <span class="dot" onclick="currentSlide(10)"></span>
+                    <span class="dot-separator"></span>
+                    <!-- Bloque 3 -->
                     <span class="dot" onclick="currentSlide(11)"></span>
                     <span class="dot" onclick="currentSlide(12)"></span>
                     <span class="dot" onclick="currentSlide(13)"></span>
                     <span class="dot" onclick="currentSlide(14)"></span>
+                    <span class="dot-separator"></span>
+                    <!-- Bloque 4 -->
                     <span class="dot" onclick="currentSlide(15)"></span>
                     <span class="dot" onclick="currentSlide(16)"></span>
                     <span class="dot" onclick="currentSlide(17)"></span>
@@ -997,11 +916,9 @@
                 </div>
                 <p class="video-desc" data-es="Serenidad, confidencialidad y naturaleza casada con el lujo. Una experiencia visual del futuro del Pacífico." data-en="Serenity, confidentiality, and nature paired with luxury. A visual experience of the future of the Pacific.">Serenidad, confidencialidad y naturaleza casada con el lujo. Una experiencia visual del futuro del Pacífico.</p>
 
-                <!-- VIDEO REAL DESCARGADO DE YOUTUBE -->
                 <h2 class="video-title" data-es="La Porcada en la Realidad" data-en="La Porcada in Reality">La Porcada en la Realidad</h2>
                 <div class="video-container">
                     <video class="promo-video" autoplay loop muted playsinline>
-                        <!-- AQUÍ PONES EL NOMBRE DEL ARCHIVO QUE DESCARGUES -->
                         <source src="video/REALPORCADA.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
@@ -1009,7 +926,6 @@
                 <p class="video-desc" data-es="Un vistazo aéreo y real de la joya del Pacífico panameño." data-en="A real and aerial glimpse of the jewel of the Panamanian Pacific.">Un vistazo aéreo y real de la joya del Pacífico panameño.</p>
             </div>
         </div>
-
     </div>
 
     <footer>
@@ -1017,15 +933,11 @@
         <p>© 2026 <strong>EcoResort La Porcada</strong> by <strong>Takyma Investment Pioneer</strong></p>
     </footer>
 
-    <!-- ============================================
-         OVERLAY CINEMATOGRÁFICO DE LOS MANGLARES
-         Se activa tras inactividad en el slide 13 (Legado)
-         ============================================ -->
+    <!-- OVERLAY CINEMATOGRÁFICO DE LOS MANGLARES -->
     <div class="manglar-overlay" id="manglarOverlay">
         <video class="manglar-video" id="manglarVideo" muted playsinline preload="auto">
             <source src="video/porcaday1.mp4" type="video/mp4">
         </video>
-        <!-- MÚSICA AMBIENTAL: WHEEL OF TIME.MP3 (subido a la raíz del repo) -->
         <audio id="manglarAudio" loop preload="auto">
             <source src="WHEEL%20OF%20TIME.MP3" type="audio/mpeg">
         </audio>
@@ -1042,7 +954,7 @@
     <script>
         // LÓGICA DE CONTRASEÑA
         function checkPassword(event) {
-            event.preventDefault(); // Evita que el formulario recargue la página
+            event.preventDefault();
             const password = document.getElementById('passInput').value;
             const errorMsg = document.getElementById('errorMsg');
             const lockScreen = document.getElementById('lockScreen');
@@ -1052,18 +964,37 @@
             if (password === 'TAKYMA2026') {
                 lockScreen.style.display = 'none';
                 dashboard.style.display = 'flex';
-                startAutoSlide(); // Inicia el carrusel automáticamente al desbloquear
+                startAutoSlide();
             } else {
-                // Mensaje de error bilingüe según el idioma actual
                 errorMsg.innerText = currentLang === 'ES' ? 'Clave incorrecta. Acceso denegado.' : 'Incorrect key. Access denied.';
-                form.classList.add('shake'); // Añade animación de temblor
+                form.classList.add('shake');
                 setTimeout(() => form.classList.remove('shake'), 300);
             }
         }
 
-        // LÓGICA DEL CARRUSEL
+        // LÓGICA DEL CARRUSEL Y CATEGORÍAS
         let slideIndex = 0;
         let autoSlideInterval;
+        const FINAL_SLIDE_INDEX = 18; // El último slide (Legado Familiar)
+        const MANGLAR_INACTIVITY_MS = 5000; // 5 segundos de inactividad en el último slide
+        let manglarShown = false;
+        let manglarTimer = null;
+        let manglarClosing = false;
+
+        function updateCategoryTitle(index) {
+            const titleEl = document.getElementById('categoryTitle');
+            let title = '';
+            if (index <= 6) title = currentLang === 'ES' ? 'I. Plan de Marketing' : 'I. Marketing Plan';
+            else if (index <= 10) title = currentLang === 'ES' ? 'II. Desarrollo Financiero' : 'II. Financial Development';
+            else if (index <= 14) title = currentLang === 'ES' ? 'III. Estudio de Mercado' : 'III. Market Study';
+            else title = currentLang === 'ES' ? 'IV. Proveedores Especiales' : 'IV. Special Providers';
+            
+            titleEl.style.opacity = 0;
+            setTimeout(() => {
+                titleEl.innerText = title;
+                titleEl.style.opacity = 1;
+            }, 200);
+        }
 
         function showSlide(index) {
             const slides = document.querySelectorAll('.carousel-slide');
@@ -1078,8 +1009,8 @@
             slides[slideIndex].classList.add('active');
             dots[slideIndex].classList.add('active');
 
-            // === CLAVE: Al llegar al slide 13 (Legado), DETENEMOS el carrusel ===
-            // para que no siga avanzando y el timer de inactividad pueda disparar el manglar.
+            updateCategoryTitle(slideIndex);
+
             if (slideIndex === FINAL_SLIDE_INDEX && isDashboardVisible() && !manglarShown && !manglarClosing) {
                 clearInterval(autoSlideInterval);
                 autoSlideInterval = null;
@@ -1093,21 +1024,21 @@
             slideIndex += step;
             showSlide(slideIndex);
             resetAutoSlide();
-            resetManglarInactivity(); // actividad del usuario
+            resetManglarInactivity();
         }
 
         function currentSlide(index) {
             slideIndex = index;
             showSlide(slideIndex);
             resetAutoSlide();
-            resetManglarInactivity(); // actividad del usuario
+            resetManglarInactivity();
         }
 
         function startAutoSlide() {
             autoSlideInterval = setInterval(() => {
                 slideIndex++;
                 showSlide(slideIndex);
-            }, 6000); // 6 segundos por slide
+            }, 4500); // Reducido a 4.5s para mayor agilidad
         }
 
         function resetAutoSlide() {
@@ -1128,39 +1059,20 @@
                 el.innerText = currentLang === 'ES' ? el.getAttribute('data-es') : el.getAttribute('data-en');
             });
 
-            // Actualizar también el subtítulo del manglar (usa innerHTML por &rarr; / &middot;)
+            updateCategoryTitle(slideIndex);
+
             const mTitle = document.querySelector('.manglar-title');
             const mSub = document.querySelector('.manglar-subtitle');
             const mCount = document.querySelector('.manglar-counter');
             const mSkip = document.querySelector('.manglar-skip');
             if (mTitle) mTitle.innerHTML = currentLang === 'ES' ? mTitle.getAttribute('data-es') : mTitle.getAttribute('data-en');
-            if (mSub)   mSub.innerHTML   = currentLang === 'ES' ? mSub.getAttribute('data-es')   : mSub.getAttribute('data-en');
+            if (mSub) mSub.innerHTML = currentLang === 'ES' ? mSub.getAttribute('data-es') : mSub.getAttribute('data-en');
             if (mCount) mCount.innerHTML = currentLang === 'ES' ? mCount.getAttribute('data-es') : mCount.getAttribute('data-en');
-            if (mSkip)  mSkip.innerHTML  = currentLang === 'ES' ? mSkip.getAttribute('data-es')  : mSkip.getAttribute('data-en');
+            if (mSkip) mSkip.innerHTML = currentLang === 'ES' ? mSkip.getAttribute('data-es') : mSkip.getAttribute('data-en');
         }
-
-        /* ============================================
-           OVERLAY CINEMATOGRÁFICO DE LOS MANGLARES
-           Se activa tras 5s de inactividad en slide 18 (último)
-           ============================================ */
-        const FINAL_SLIDE_INDEX = 18;
-        const MANGLAR_INACTIVITY_MS = 5000; // 5 segundos sin actividad
-        let manglarShown = false;
-        let manglarTimer = null;
-        let manglarClosing = false;
 
         function isDashboardVisible() {
             return document.getElementById('dashboard').style.display === 'flex';
-        }
-
-        // Llamado desde showSlide cada vez que cambia el slide
-        function checkManglarTrigger() {
-            // Solo activar timer si: estamos en slide 13 + dashboard visible + no se mostró aún
-            if (slideIndex === FINAL_SLIDE_INDEX && isDashboardVisible() && !manglarShown && !manglarClosing) {
-                startManglarCountdown();
-            } else {
-                clearManglarCountdown();
-            }
         }
 
         function startManglarCountdown() {
@@ -1175,16 +1087,13 @@
             }
         }
 
-        // Cualquier actividad del usuario reinicia el contador (si estamos en slide 13)
         function resetManglarInactivity() {
             if (slideIndex === FINAL_SLIDE_INDEX && isDashboardVisible() && !manglarShown && !manglarClosing) {
                 startManglarCountdown();
             }
         }
 
-        // Listener global: clicks en enlaces, scroll, teclas → reinicia timer
         document.addEventListener('click', function(e) {
-            // Si el click es dentro del overlay del manglar, no hacer nada aquí
             if (e.target.closest('.manglar-overlay')) return;
             resetManglarInactivity();
         });
@@ -1198,47 +1107,36 @@
         });
 
         document.addEventListener('scroll', resetManglarInactivity, { passive: true });
-        // NOTA: No detectamos mousemove para no resetear el contador constantemente.
-        // Solo clicks, scroll y teclas cuentan como actividad.
 
         function launchManglar() {
             if (manglarShown || manglarClosing) return;
             manglarShown = true;
             clearManglarCountdown();
-
-            // Pausar el carrusel automático para que no siga avanzando
             clearInterval(autoSlideInterval);
 
             const overlay = document.getElementById('manglarOverlay');
             const video = document.getElementById('manglarVideo');
             const audio = document.getElementById('manglarAudio');
 
-            // Mostrar overlay con fader
             overlay.classList.add('visible');
 
-            // Reproducir el video tras el fader de entrada
             setTimeout(() => {
                 const playPromise = video.play();
                 if (playPromise !== undefined) {
                     playPromise.catch(err => {
-                        console.log('Autoplay bloqueado, reintentando con muted:', err);
                         video.muted = true;
                         video.play().catch(() => {});
                     });
                 }
 
-                // === MÚSICA AMBIENTAL con fade-in suave ===
                 if (audio) {
-                    audio.volume = 0; // Empezar en silencio
+                    audio.volume = 0;
                     audio.currentTime = 0;
                     const audioPromise = audio.play();
                     if (audioPromise !== undefined) {
                         audioPromise.then(() => {
-                            // Fade-in: subir volumen de 0 a 0.7 en 2.5 segundos
                             fadeAudio(audio, 0, 0.7, 2500);
                         }).catch(err => {
-                            console.log('Audio autoplay bloqueado:', err);
-                            // Reintentar una vez más tras 200ms (a veces el navegador necesita un ciclo más)
                             setTimeout(() => {
                                 audio.play().then(() => {
                                     fadeAudio(audio, 0, 0.7, 2500);
@@ -1249,11 +1147,9 @@
                 }
             }, 1000);
 
-            // Cuando termine el video, cerrar automáticamente
             video.addEventListener('ended', closeManglar);
         }
 
-        // Función auxiliar para hacer fade del audio
         function fadeAudio(audioEl, fromVol, toVol, durationMs) {
             const steps = 20;
             const stepDuration = durationMs / steps;
@@ -1263,17 +1159,14 @@
             const fadeInterval = setInterval(() => {
                 currentStep++;
                 const newVol = fromVol + (volumeStep * currentStep);
-                try {
-                    audioEl.volume = Math.max(0, Math.min(1, newVol));
-                } catch(e) {}
+                try { audioEl.volume = Math.max(0, Math.min(1, newVol)); } catch(e) {}
 
                 if (currentStep >= steps) {
                     clearInterval(fadeInterval);
                     try { audioEl.volume = toVol; } catch(e) {}
                 }
             }, stepDuration);
-
-            return fadeInterval; // por si se quiere cancelar
+            return fadeInterval;
         }
 
         function closeManglar() {
@@ -1286,7 +1179,6 @@
 
             overlay.classList.add('closing');
 
-            // === MÚSICA AMBIENTAL: fade-out suave antes de parar ===
             if (audio && !audio.paused) {
                 const currentVol = audio.volume;
                 fadeAudio(audio, currentVol, 0, 1400);
@@ -1299,15 +1191,12 @@
                 if (audio) {
                     audio.pause();
                     try { audio.currentTime = 0; } catch(e) {}
-                    audio.volume = 0.7; // Restaurar volumen para próxima reproducción
+                    audio.volume = 0.7;
                 }
                 manglarClosing = false;
-                // Permitir que se vuelva a mostrar si vuelve al slide 13
                 manglarShown = false;
-                // Reanudar el carrusel
                 if (isDashboardVisible()) {
                     resetAutoSlide();
-                    checkManglarTrigger();
                 }
             }, 1400);
         }
@@ -1316,7 +1205,6 @@
             closeManglar();
         }
 
-        // Exponer en window para los handlers inline
         window.skipManglar = skipManglar;
     </script>
 </body>
