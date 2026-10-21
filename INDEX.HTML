@@ -10,8 +10,8 @@
     <style>
         :root {
             --color-bg: #0c0c0d;
-            --color-surface: #16161a;
-            --color-surface-light: #1f1f24;
+            --color-surface: rgba(22, 22, 26, 0.85);
+            --color-surface-light: rgba(31, 31, 36, 0.95);
             --color-primary: #d4b483;
             --color-primary-bright: #e8cf9e;
             --color-eco: #8f9b77;
@@ -26,8 +26,7 @@
         body {
             margin: 0;
             padding: 0;
-            background-color: var(--color-bg);
-            background-image: radial-gradient(circle at top right, #1a1a1e 0%, #0c0c0d 60%);
+            background-color: #000;
             color: var(--color-text);
             font-family: var(--font-sans);
             line-height: 1.6;
@@ -35,9 +34,39 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* FONDO CINEMATOGRÁFICO DE LOS MANGLARES */
+        .bg-video-wrapper {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: 0;
+            overflow: hidden;
+            display: none;
+        }
+        .bg-manglar-video {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%; min-height: 100%;
+            width: auto; height: auto;
+            object-fit: cover;
+            filter: brightness(0.35) blur(1px) saturate(1.1);
+        }
+        .bg-manglar-vignette {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.65) 100%),
+                        linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 30%, transparent 70%, rgba(0,0,0,0.9) 100%);
+            pointer-events: none;
+            z-index: 1;
         }
 
         .container {
+            position: relative;
+            z-index: 2;
             max-width: 1100px;
             margin: 0 auto;
             padding: 60px 30px;
@@ -60,7 +89,7 @@
         }
 
         .lang-btn, .mute-btn {
-            background: transparent;
+            background: rgba(22, 22, 26, 0.6);
             border: 1px solid var(--color-primary);
             color: var(--color-primary);
             padding: 10px 24px;
@@ -72,6 +101,7 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             font-size: 0.8rem;
+            backdrop-filter: blur(8px);
         }
 
         .lang-btn:hover, .mute-btn:hover {
@@ -90,6 +120,10 @@
             max-width: 450px;
             text-align: center;
             animation: fadeInUp 1s ease;
+            background: radial-gradient(circle at center, #16161a 0%, #0c0c0d 90%);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
         }
 
         .logo-glow {
@@ -204,6 +238,7 @@
             flex-direction: column;
             align-items: center;
             animation: fadeIn 1.5s ease;
+            background: transparent;
         }
 
         .dashboard-logo {
@@ -211,12 +246,13 @@
             max-width: 250px;
             object-fit: contain;
             margin-bottom: 40px;
-            filter: brightness(1.2);
+            filter: brightness(1.2) drop-shadow(0 4px 15px rgba(0,0,0,0.8));
         }
 
         header {
             text-align: center;
             margin-bottom: 40px;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.9);
         }
 
         header h1 {
@@ -256,6 +292,7 @@
         }
         .hub-card {
             background: var(--color-surface);
+            backdrop-filter: blur(12px);
             border: 1px solid var(--color-border);
             padding: 40px 30px;
             border-radius: 2px;
@@ -339,7 +376,7 @@
             align-items: center;
         }
         .back-btn {
-            background: transparent;
+            background: rgba(22, 22, 26, 0.6);
             border: 1px solid var(--color-text-muted);
             color: var(--color-text-muted);
             padding: 8px 20px;
@@ -352,6 +389,7 @@
             transition: all 0.3s ease;
             margin-bottom: 30px;
             align-self: flex-start;
+            backdrop-filter: blur(8px);
         }
         .back-btn:hover {
             border-color: var(--color-primary);
@@ -373,6 +411,7 @@
             display: inline-block;
             padding-bottom: 8px;
             transition: opacity 0.4s ease;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.9);
         }
 
         .carousel-wrapper {
@@ -399,6 +438,7 @@
         }
         .link-card {
             background: var(--color-surface);
+            backdrop-filter: blur(12px);
             border: 1px solid var(--color-border);
             padding: 40px;
             border-radius: 2px;
@@ -522,7 +562,7 @@
             width: 30px;
         }
 
-        /* --- ESTILOS DE LOS VIDEOS FINALES --- */
+        /* --- VIDEOS FINALES --- */
         .video-section {
             width: 100%;
             max-width: 1000px;
@@ -537,6 +577,7 @@
             color: var(--color-primary);
             margin-bottom: 20px;
             letter-spacing: 2px;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.9);
         }
         .video-container {
             position: relative;
@@ -554,11 +595,12 @@
             font-size: 0.9rem;
             letter-spacing: 1px;
             margin-bottom: 20px;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.9);
         }
 
         /* SUPER PREMIUM CARD */
         .link-card.is-super-premium {
-            background: linear-gradient(135deg, #1a1a1e 0%, #2a2419 50%, #1a1a1e 100%);
+            background: linear-gradient(135deg, rgba(26,26,30,0.9) 0%, rgba(42,36,25,0.9) 50%, rgba(26,26,30,0.9) 100%);
             border: 1px solid rgba(212, 180, 131, 0.5);
             box-shadow: inset 0 0 60px rgba(212, 180, 131, 0.08), 0 0 30px rgba(212, 180, 131, 0.15);
         }
@@ -587,7 +629,7 @@
         }
         .link-card.is-super-premium .card-btn::before { content: '◆ '; margin-right: 8px; }
         .link-card.is-super-premium:hover {
-            background: linear-gradient(135deg, #2a2419 0%, #3a3225 50%, #1a1a1e 100%);
+            background: linear-gradient(135deg, rgba(42,36,25,0.95) 0%, rgba(58,50,37,0.95) 50%, rgba(26,26,30,0.95) 100%);
             border-color: var(--color-primary-bright);
             box-shadow: inset 0 0 80px rgba(212, 180, 131, 0.12), 0 0 50px rgba(212, 180, 131, 0.25);
         }
@@ -630,6 +672,10 @@
             flex-direction: column;
             align-items: center;
             gap: 10px;
+            position: relative;
+            z-index: 2;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(8px);
         }
         footer strong { color: var(--color-primary); font-weight: 500; }
         .eco-logo { max-height: 40px; opacity: 0.8; filter: brightness(1.2); }
@@ -659,69 +705,22 @@
             .carousel-container { height: 400px; }
             .video-title { font-size: 2rem; }
         }
-
-        /* OVERLAY CINEMATOGRÁFICO DE LOS MANGLARES */
-        .manglar-overlay {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: #000; z-index: 9998;
-            opacity: 0; visibility: hidden;
-            transition: opacity 1.4s ease, visibility 1.4s ease;
-            display: flex; align-items: center; justify-content: center; overflow: hidden;
-        }
-        .manglar-overlay.visible { opacity: 1; visibility: visible; }
-        .manglar-overlay.closing { opacity: 0; }
-        .manglar-video {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            min-width: 100%; min-height: 100%; width: auto; height: auto;
-            object-fit: cover;
-            filter: brightness(0.88) contrast(1.08) saturate(1.15);
-        }
-        .manglar-vignette {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(ellipse at center, transparent 25%, rgba(0,0,0,0.55) 100%),
-                        linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, transparent 28%, transparent 60%, rgba(0,0,0,0.9) 100%);
-            pointer-events: none; z-index: 2;
-        }
-        .manglar-content { position: relative; z-index: 3; text-align: center; padding: 40px; max-width: 800px; }
-        .manglar-title {
-            font-family: var(--font-serif); font-size: 2.8rem;
-            color: var(--color-primary-bright); letter-spacing: 6px;
-            text-transform: uppercase; text-shadow: 0 4px 24px rgba(0,0,0,0.95);
-            margin: 0 0 14px 0; font-weight: 400;
-            opacity: 0; transform: translateY(15px);
-            animation: manglar-text-in 2.2s cubic-bezier(0.22, 1, 0.36, 1) 1.2s forwards;
-        }
-        .manglar-subtitle {
-            font-family: var(--font-serif); font-style: italic; font-size: 1.2rem;
-            color: rgba(255,255,255,0.92); letter-spacing: 4px;
-            text-shadow: 0 2px 12px rgba(0,0,0,0.95);
-            opacity: 0; transform: translateY(15px);
-            animation: manglar-text-in 2.2s cubic-bezier(0.22, 1, 0.36, 1) 2.2s forwards;
-        }
-        .manglar-divider {
-            width: 60px; height: 1px; background: var(--color-primary); margin: 24px auto;
-            opacity: 0; animation: manglar-text-in 1.8s ease-out 1.8s forwards;
-        }
-        .manglar-skip {
-            position: absolute; bottom: 30px; right: 30px; z-index: 4;
-            background: transparent; border: 1px solid rgba(255,255,255,0.3);
-            color: rgba(255,255,255,0.7); padding: 12px 28px;
-            font-family: var(--font-sans); font-size: 0.7rem; letter-spacing: 3px;
-            text-transform: uppercase; cursor: pointer; transition: all 0.3s ease;
-            backdrop-filter: blur(4px);
-            opacity: 0; animation: manglar-text-in 1s ease-out 3s forwards;
-        }
-        .manglar-skip:hover {
-            background: rgba(255,255,255,0.08); border-color: var(--color-primary);
-            color: var(--color-primary-bright); letter-spacing: 4px;
-        }
-        @keyframes manglar-text-in {
-            0% { opacity: 0; transform: translateY(15px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
     </style>
 </head>
 <body>
+
+    <!-- FONDO CINEMATOGRÁFICO DE LOS MANGLARES -->
+    <div class="bg-video-wrapper" id="bgVideoWrapper">
+        <video class="bg-manglar-video" id="manglarVideo" autoplay loop muted playsinline>
+            <source src="video/porcaday1.mp4" type="video/mp4">
+        </video>
+        <div class="bg-manglar-vignette"></div>
+    </div>
+
+    <!-- AUDIO GLOBAL DE FONDO -->
+    <audio id="backgroundAudio" loop preload="auto">
+        <source src="WHEEL%20OF%20TIME.MP3" type="audio/mpeg">
+    </audio>
 
     <div class="container">
         <div class="top-bar">
@@ -963,7 +962,7 @@
                 </div>
             </div>
 
-            <!-- SECCIÓN DE VIDEOS FINALES -->
+            <!-- SECCIÓN DE VIDEOS FINALES EN PRIMER PLANO -->
             <div class="video-section">
                 <h2 class="video-title" data-es="La Visión en Imagen" data-en="The Vision in Images">La Visión en Imagen</h2>
                 <div class="video-container">
@@ -991,26 +990,6 @@
         <p>© 2026 <strong>EcoResort La Porcada</strong> by <strong>Takyma Investment Pioneer</strong></p>
     </footer>
 
-    <!-- AUDIO GLOBAL DE FONDO -->
-    <audio id="backgroundAudio" loop preload="auto">
-        <source src="WHEEL%20OF%20TIME.MP3" type="audio/mpeg">
-    </audio>
-
-    <!-- OVERLAY CINEMATOGRÁFICO DE LOS MANGLARES -->
-    <div class="manglar-overlay" id="manglarOverlay">
-        <video class="manglar-video" id="manglarVideo" muted playsinline preload="auto">
-            <source src="video/porcaday1.mp4" type="video/mp4">
-        </video>
-        <div class="manglar-vignette"></div>
-        <div class="manglar-content">
-            <h2 class="manglar-title" data-es="Los Manglares de La Porcada" data-en="The Mangroves of La Porcada">Los Manglares de La Porcada</h2>
-            <div class="manglar-divider"></div>
-            <p class="manglar-subtitle" data-es="Naturaleza intacta en el corazón del Pacífico" data-en="Untouched Nature in the Heart of the Pacific">Naturaleza intacta en el corazón del Pacífico</p>
-        </div>
-        <div class="manglar-counter" data-es="Cierre Cinematográfico &middot; La Porcada" data-en="Cinematic Closing &middot; La Porcada">Cierre Cinematográfico &middot; La Porcada</div>
-        <button class="manglar-skip" onclick="skipManglar()" data-es="Saltar &rarr;" data-en="Skip &rarr;">Saltar &rarr;</button>
-    </div>
-
     <script>
         // VARIABLES GLOBALES DE ESTADO
         let currentLang = 'ES';
@@ -1018,9 +997,6 @@
         let currentCategorySlides = [];
         let slideIndex = 0;
         let autoSlideInterval;
-        let manglarShown = false;
-        let manglarTimer = null;
-        let manglarClosing = false;
         let isMuted = false;
 
         // LÓGICA DE CONTRASEÑA
@@ -1030,12 +1006,14 @@
             const errorMsg = document.getElementById('errorMsg');
             const lockScreen = document.getElementById('lockScreen');
             const dashboard = document.getElementById('dashboard');
+            const bgVideo = document.getElementById('bgVideoWrapper');
             const form = document.querySelector('.access-form');
 
             if (password === 'TAKYMA2026') {
                 lockScreen.style.display = 'none';
                 dashboard.style.display = 'flex';
-                startBackgroundMusic(); // ¡Arranca la música al picar el password!
+                bgVideo.style.display = 'block'; // Mostrar el fondo de manglares
+                startBackgroundMusic(); // Arrancar la música
             } else {
                 errorMsg.innerText = currentLang === 'ES' ? 'Clave incorrecta. Acceso denegado.' : 'Incorrect key. Access denied.';
                 form.classList.add('shake');
@@ -1134,29 +1112,18 @@
 
             currentCategorySlides[slideIndex].classList.add('active');
             if (dots[slideIndex]) dots[slideIndex].classList.add('active');
-
-            // Disparador del cierre cinematográfico
-            if (currentCategory === 'proveedores' && slideIndex === currentCategorySlides.length - 1 && !manglarShown && !manglarClosing) {
-                clearInterval(autoSlideInterval);
-                autoSlideInterval = null;
-                startManglarCountdown();
-            } else {
-                clearManglarCountdown();
-            }
         }
 
         function moveSlide(step) {
             slideIndex += step;
             showSlide(slideIndex);
             resetAutoSlide();
-            resetManglarInactivity();
         }
 
         function currentSlide(index) {
             slideIndex = index;
             showSlide(slideIndex);
             resetAutoSlide();
-            resetManglarInactivity();
         }
 
         function startAutoSlide() {
@@ -1183,76 +1150,6 @@
             });
 
             if (currentCategory) updateCategoryTitle(currentCategory);
-
-            const mTitle = document.querySelector('.manglar-title');
-            const mSub = document.querySelector('.manglar-subtitle');
-            const mCount = document.querySelector('.manglar-counter');
-            const mSkip = document.querySelector('.manglar-skip');
-            if (mTitle) mTitle.innerHTML = currentLang === 'ES' ? mTitle.getAttribute('data-es') : mTitle.getAttribute('data-en');
-            if (mSub) mSub.innerHTML = currentLang === 'ES' ? mSub.getAttribute('data-es') : mSub.getAttribute('data-en');
-            if (mCount) mCount.innerHTML = currentLang === 'ES' ? mCount.getAttribute('data-es') : mCount.getAttribute('data-en');
-            if (mSkip) mSkip.innerHTML = currentLang === 'ES' ? mSkip.getAttribute('data-es') : mSkip.getAttribute('data-en');
-        }
-
-        // LÓGICA CINEMATOGRÁFICA DE LOS MANGLARES
-        function startManglarCountdown() {
-            clearManglarCountdown();
-            manglarTimer = setTimeout(launchManglar, 5000);
-        }
-
-        function clearManglarCountdown() {
-            if (manglarTimer) {
-                clearTimeout(manglarTimer);
-                manglarTimer = null;
-            }
-        }
-
-        function resetManglarInactivity() {
-            if (currentCategory === 'proveedores' && slideIndex === currentCategorySlides.length - 1 && !manglarShown && !manglarClosing) {
-                startManglarCountdown();
-            }
-        }
-
-        document.addEventListener('click', function(e) {
-            if (e.target.closest('.manglar-overlay')) return;
-            resetManglarInactivity();
-        });
-
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && manglarShown) {
-                skipManglar();
-            } else {
-                resetManglarInactivity();
-            }
-        });
-
-        function launchManglar() {
-            if (manglarShown || manglarClosing) return;
-            manglarShown = true;
-            clearManglarCountdown();
-
-            const overlay = document.getElementById('manglarOverlay');
-            const video = document.getElementById('manglarVideo');
-            const audio = document.getElementById('backgroundAudio');
-
-            overlay.classList.add('visible');
-
-            setTimeout(() => {
-                const playPromise = video.play();
-                if (playPromise !== undefined) {
-                    playPromise.catch(() => {
-                        video.muted = true;
-                        video.play().catch(() => {});
-                    });
-                }
-
-                // Subir el volumen de la música ambiente para el cierre
-                if (audio && !audio.paused) {
-                    fadeAudio(audio, audio.volume, 0.8, 2500); // Sube a 80%
-                }
-            }, 1000);
-
-            video.addEventListener('ended', closeManglar);
         }
 
         function fadeAudio(audioEl, fromVol, toVol, durationMs) {
@@ -1271,35 +1168,6 @@
                     try { audioEl.volume = toVol; } catch(e) {}
                 }
             }, stepDuration);
-        }
-
-        function closeManglar() {
-            if (manglarClosing) return;
-            manglarClosing = true;
-
-            const overlay = document.getElementById('manglarOverlay');
-            const video = document.getElementById('manglarVideo');
-            const audio = document.getElementById('backgroundAudio');
-
-            overlay.classList.add('closing');
-
-            // Bajar la música de nuevo al nivel ambiente (40%)
-            if (audio && !audio.paused) {
-                fadeAudio(audio, audio.volume, 0.4, 1400);
-            }
-
-            setTimeout(() => {
-                overlay.classList.remove('visible', 'closing');
-                video.pause();
-                try { video.currentTime = 0; } catch(e) {}
-                manglarClosing = false;
-                manglarShown = false;
-                backToHub(); // Vuelve al menú principal
-            }, 1400);
-        }
-
-        function skipManglar() {
-            closeManglar();
         }
     </script>
 </body>
