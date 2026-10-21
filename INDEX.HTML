@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -779,6 +779,12 @@
                         <p class="hub-desc" data-es="Operadores, constructores, legal y estructura del legado." data-en="Operators, builders, legal and legacy structure.">Operadores, constructores, legal y estructura del legado.</p>
                         <span class="hub-btn" data-es="ABRIR BLOQUE" data-en="OPEN SECTION">ABRIR BLOQUE</span>
                     </div>
+                    <div class="hub-card" onclick="openCategory('plandirector')">
+                        <div class="hub-roman">V</div>
+                        <h3 class="hub-title" data-es="Plan Director" data-en="Master Plan">Plan Director</h3>
+                        <p class="hub-desc" data-es="Análisis técnico de idoneidad territorial, GIS, sistema constructivo CLT y briefing ejecutivo para inversores institucionales." data-en="Technical territorial suitability analysis, GIS, CLT construction system and executive briefing for institutional investors.">Análisis técnico de idoneidad territorial, GIS, sistema constructivo CLT y briefing ejecutivo para inversores institucionales.</p>
+                        <span class="hub-btn" data-es="ABRIR BLOQUE" data-en="OPEN SECTION">ABRIR BLOQUE</span>
+                    </div>
                 </div>
             </div>
 
@@ -954,6 +960,33 @@
                             </a>
                         </div>
 
+                        <!-- BLOQUE 5: PLAN DIRECTOR (19, 20, 21) -->
+                        <div class="carousel-slide" data-cat="plandirector">
+                            <a href="https://plandirectorlaporcada.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
+                                <div class="card-num">19</div>
+                                <h3 class="card-title" data-es="Plan Director · Informe Completo" data-en="Master Plan · Full Report">Plan Director · Informe Completo</h3>
+                                <p class="card-desc" data-es="Informe técnico bilingüe (ES/EN) con 20 capítulos: idoneidad territorial, análisis GIS, medio marino, mareas, vientos, sistema constructivo CLT, briefing para inversores. 16 mapas técnicos generados a partir de DEM Copernicus 30m." data-en="Bilingual technical report (ES/EN) with 20 chapters: territorial suitability, GIS analysis, marine environment, tides, winds, CLT construction system, investor briefing. 16 technical maps generated from Copernicus 30m DEM.">Informe técnico bilingüe (ES/EN) con 20 capítulos: idoneidad territorial, análisis GIS, medio marino, mareas, vientos, sistema constructivo CLT, briefing para inversores. 16 mapas técnicos generados a partir de DEM Copernicus 30m.</p>
+                                <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                            </a>
+                        </div>
+                        <div class="carousel-slide" data-cat="plandirector">
+                            <a href="https://plandirectorlaporcada.netlify.app/#ch14" class="link-card" target="_blank" rel="noopener noreferrer">
+                                <div class="card-num">20</div>
+                                <h3 class="card-title" data-es="Sistema CLT + Acero + Epoxy" data-en="CLT + Steel + Epoxy System">Sistema CLT + Acero + Epoxy</h3>
+                                <p class="card-desc" data-es="Capítulo 14 del Plan Director: sistema constructivo para sismo >9 Richter, cimentaciones ligeras, plazos reducidos 30-40%, ahorro neto 8.1 M USD. Incluye 4 casos exitosos comparables (Humbird Hotel, Mjøstårnet, Ascent MKE, Brock Commons)." data-en="Chapter 14 of the Master Plan: construction system for >9 Richter seismic, light foundations, 30-40% reduced timelines, net savings 8.1 M USD. Includes 4 successful comparable cases (Humbird Hotel, Mjøstårnet, Ascent MKE, Brock Commons).">Capítulo 14 del Plan Director: sistema constructivo para sismo >9 Richter, cimentaciones ligeras, plazos reducidos 30-40%, ahorro neto 8.1 M USD. Incluye 4 casos exitosos comparables (Humbird Hotel, Mjøstårnet, Ascent MKE, Brock Commons).</p>
+                                <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                            </a>
+                        </div>
+                        <div class="carousel-slide" data-cat="plandirector">
+                            <a href="https://plandirectorlaporcada.netlify.app/#ch15" class="link-card is-super-premium" target="_blank" rel="noopener noreferrer">
+                                <div class="card-badge" data-es="Inversores" data-en="Investors">Inversores</div>
+                                <div class="card-num">21</div>
+                                <h3 class="card-title" data-es="Briefing para Inversores" data-en="Investor Briefing">Briefing para Inversores</h3>
+                                <p class="card-desc" data-es="Capítulo 15: cierre ejecutivo para JP Morgan. Métricas financieras indicativas: inversión 376 M USD, IRR proyecto 12-15%, equity IRR 15-20%, payback 8-10 años. Argumentos ESG cuantificables, riesgos con mitigaciones y próximos pasos para el compromiso." data-en="Chapter 15: executive briefing for JP Morgan. Indicative financial metrics: investment 376 M USD, project IRR 12-15%, equity IRR 15-20%, payback 8-10 years. Quantifiable ESG arguments, risks with mitigations and next steps for engagement.">Capítulo 15: cierre ejecutivo para JP Morgan. Métricas financieras indicativas: inversión 376 M USD, IRR proyecto 12-15%, equity IRR 15-20%, payback 8-10 años. Argumentos ESG cuantificables, riesgos con mitigaciones y próximos pasos para el compromiso.</p>
+                                <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                            </a>
+                        </div>
+
                         <button class="carousel-btn prev" onclick="moveSlide(-1)">&#10094;</button>
                         <button class="carousel-btn next" onclick="moveSlide(1)">&#10095;</button>
                     </div>
@@ -1094,6 +1127,7 @@
             else if (catName === 'financiero') title = currentLang === 'ES' ? 'II. Desarrollo Financiero' : 'II. Financial Development';
             else if (catName === 'mercado') title = currentLang === 'ES' ? 'III. Estudio de Mercado' : 'III. Market Study';
             else if (catName === 'proveedores') title = currentLang === 'ES' ? 'IV. Proveedores Especiales' : 'IV. Special Providers';
+            else if (catName === 'plandirector') title = currentLang === 'ES' ? 'V. Plan Director de Isla La Porcada' : 'V. Isla La Porcada Master Plan';
             
             titleEl.style.opacity = 0;
             setTimeout(() => {
