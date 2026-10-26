@@ -656,6 +656,51 @@
         .card-badge::before { content: '◆'; font-size: 0.55rem; }
         .card-badge::after { content: '◆'; font-size: 0.55rem; }
 
+        /* SEALED CARD — Capítulo sellado / acceso restringido */
+        .link-card.is-sealed {
+            background: linear-gradient(135deg, rgba(20,20,24,0.92) 0%, rgba(28,28,34,0.92) 50%, rgba(20,20,24,0.92) 100%);
+            border: 1px dashed rgba(212, 180, 131, 0.45);
+            cursor: pointer;
+        }
+        .link-card.is-sealed::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: repeating-linear-gradient(45deg, transparent 0, transparent 14px, rgba(212,180,131,0.025) 14px, rgba(212,180,131,0.025) 28px);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .link-card.is-sealed > * { position: relative; z-index: 1; }
+        .link-card.is-sealed .card-num {
+            color: var(--color-primary);
+            opacity: 0.35;
+        }
+        .link-card.is-sealed .card-title { color: var(--color-primary-bright); opacity: 0.92; }
+        .link-card.is-sealed .card-desc { font-style: italic; opacity: 0.7; }
+        .link-card.is-sealed .card-btn {
+            background: transparent;
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            cursor: default;
+        }
+        .link-card.is-sealed .card-btn::before { content: '⚿  '; opacity: 0.7; }
+        .link-card.is-sealed:hover {
+            border-color: rgba(212, 180, 131, 0.6);
+            background: linear-gradient(135deg, rgba(26,26,30,0.95) 0%, rgba(36,34,30,0.95) 50%, rgba(26,26,30,0.95) 100%);
+        }
+        .card-lock {
+            position: absolute; top: 20px; right: 20px;
+            width: 28px; height: 28px;
+            display: flex; align-items: center; justify-content: center;
+            border: 1px solid rgba(212, 180, 131, 0.5);
+            border-radius: 50%;
+            color: var(--color-primary);
+            font-size: 0.7rem;
+            z-index: 2;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(4px);
+        }
+
         /* Footer */
         footer {
             margin-top: 60px;
@@ -995,6 +1040,17 @@
                             </a>
                         </div>
 
+                        <!-- BLOQUE 5 · CAPÍTULO SELLADO 23 -->
+                        <div class="carousel-slide" data-cat="plandirector">
+                            <div class="link-card is-sealed" onclick="openSealedModal(event)">
+                                <div class="card-lock" title="Acceso restringido">⚿</div>
+                                <div class="card-num">23</div>
+                                <h3 class="card-title" data-es="Plan Director Maestro · Anexos" data-en="Master Plan · Operational Annexes">Plan Director Maestro · Anexos</h3>
+                                <p class="card-desc" data-es="Seguridad &amp; Protocolo · RR.HH. · Gastronomía · Spa &amp; Wellness · Energía &amp; Autosuficiencia · Plan de Evacuación. Documentación técnica completa disponible bajo NDA en fase de due diligence." data-en="Security &amp; Protocol · HR · Gastronomy · Spa &amp; Wellness · Energy &amp; Self-sufficiency · Evacuation Plan. Full technical documentation available under NDA during due diligence.">Seguridad &amp; Protocolo · RR.HH. · Gastronomía · Spa &amp; Wellness · Energía &amp; Autosuficiencia · Plan de Evacuación. Documentación técnica completa disponible bajo NDA en fase de due diligence.</p>
+                                <span class="card-btn" data-es="CAPÍTULO SELLADO" data-en="SEALED CHAPTER">CAPÍTULO SELLADO</span>
+                            </div>
+                        </div>
+
                         <button class="carousel-btn prev" onclick="moveSlide(-1)">&#10094;</button>
                         <button class="carousel-btn next" onclick="moveSlide(1)">&#10095;</button>
                     </div>
@@ -1030,6 +1086,21 @@
         <img src="images/ECO.PNG" alt="EcoResort Logo" class="eco-logo" onerror="this.style.display='none';">
         <p>© 2026 <strong>EcoResort La Porcada</strong> by <strong>Takyma Investment Pioneer</strong></p>
     </footer>
+
+    <!-- MODAL CAPÍTULO SELLADO -->
+    <div id="sealedModal" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.85); backdrop-filter:blur(10px); align-items:center; justify-content:center; padding:20px; box-sizing:border-box;">
+        <div style="background:linear-gradient(135deg, #16161a 0%, #0c0c0d 100%); border:1px solid rgba(212,180,131,0.4); border-radius:6px; max-width:560px; width:100%; padding:50px 40px; text-align:center; position:relative; box-shadow:0 30px 80px rgba(0,0,0,0.9), inset 0 0 60px rgba(212,180,131,0.04);">
+            <button onclick="closeSealedModal()" style="position:absolute; top:15px; right:15px; background:transparent; border:1px solid rgba(255,255,255,0.15); color:#9a9a9a; width:32px; height:32px; border-radius:50%; cursor:pointer; font-size:14px; transition:all 0.3s ease;">×</button>
+            <div style="font-family:'Cormorant Garamond', serif; font-size:3rem; color:#d4b483; opacity:0.6; margin-bottom:20px;">⚿</div>
+            <h3 style="font-family:'Cormorant Garamond', serif; font-size:1.8rem; color:#f5f5f5; font-weight:500; letter-spacing:2px; margin:0 0 8px 0;" data-es="Capítulo Sellado" data-en="Sealed Chapter">Capítulo Sellado</h3>
+            <p style="color:#d4b483; font-size:0.75rem; text-transform:uppercase; letter-spacing:3px; margin:0 0 30px 0;" data-es="Plan Director Maestro · Anexos Operativos" data-en="Master Plan · Operational Annexes">Plan Director Maestro · Anexos Operativos</p>
+            <p style="color:#9a9a9a; font-size:0.9rem; line-height:1.7; font-weight:300; margin:0 0 24px 0;" data-es="La documentación técnica completa de los seis anexos operativos —Seguridad &amp; Protocolo, RR.HH., Gastronomía, Spa &amp; Wellness, Energía &amp; Autosuficiencia y Plan de Evacuación— está disponible para los comités de inversión, operadores y proveedores bajo acuerdo de confidencialidad (NDA) durante la fase de due diligence." data-en="The complete technical documentation for the six operational annexes —Security &amp; Protocol, HR, Gastronomy, Spa &amp; Wellness, Energy &amp; Self-sufficiency and Evacuation Plan— is available to investment committees, operators and suppliers under a non-disclosure agreement (NDA) during the due diligence phase.">La documentación técnica completa de los seis anexos operativos —Seguridad &amp; Protocolo, RR.HH., Gastronomía, Spa &amp; Wellness, Energía &amp; Autosuficiencia y Plan de Evacuación— está disponible para los comités de inversión, operadores y proveedores bajo acuerdo de confidencialidad (NDA) durante la fase de due diligence.</p>
+            <div style="border-top:1px solid rgba(255,255,255,0.08); padding-top:20px; margin-top:10px;">
+                <p style="font-family:'Cormorant Garamond', serif; font-style:italic; color:#d4b483; font-size:0.95rem; margin:0 0 6px 0;" data-es="« Lo que no se enseña existe. Solo se reserva para quien firma. »" data-en="« What is not shown exists. It is reserved for those who sign. »">« Lo que no se enseña existe. Solo se reserva para quien firma. »</p>
+                <p style="color:#9a9a9a; font-size:0.7rem; text-transform:uppercase; letter-spacing:2px; margin:0;">Takyma Investment Pioneer · 2026</p>
+            </div>
+        </div>
+    </div>
 
     <script>
         // VARIABLES GLOBALES DE ESTADO
@@ -1211,6 +1282,22 @@
                 }
             }, stepDuration);
         }
+
+        // MODAL DEL CAPÍTULO SELLADO (NDA)
+        function openSealedModal(event) {
+            event.preventDefault();
+            const modal = document.getElementById('sealedModal');
+            if (!modal) return;
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        function closeSealedModal() {
+            const modal = document.getElementById('sealedModal');
+            if (!modal) return;
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
+        }
     </script>
 </body>
 </html>
+
