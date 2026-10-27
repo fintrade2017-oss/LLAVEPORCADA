@@ -740,6 +740,148 @@
         }
         .shake { animation: shake 0.3s ease-in-out; }
 
+        /* ============ CIERRE CINEMATOGRÁFICO ============ */
+        .closing-overlay{
+            position:fixed; inset:0;
+            z-index:9998;
+            background:radial-gradient(ellipse at center, #0c0c0d 0%, #000 80%);
+            display:none;
+            flex-direction:column;
+            align-items:center;
+            justify-content:center;
+            text-align:center;
+            padding:40px;
+            box-sizing:border-box;
+            opacity:0;
+            transition:opacity 3s ease-in-out;
+        }
+        .closing-overlay.visible{
+            display:flex;
+            opacity:1;
+        }
+        .closing-overlay::before{
+            content:'';
+            position:absolute; inset:0;
+            background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+            opacity:0.18;
+            mix-blend-mode:overlay;
+            pointer-events:none;
+        }
+        .closing-vignette{
+            position:absolute; inset:0;
+            background:radial-gradient(ellipse at center, transparent 0%, transparent 40%, rgba(0,0,0,0.7) 100%);
+            pointer-events:none;
+        }
+        .closing-content{
+            position:relative;
+            z-index:2;
+            max-width:760px;
+            animation:closingRise 4s cubic-bezier(.2,.8,.2,1) both;
+        }
+        @keyframes closingRise{
+            0%   { opacity:0; transform:translateY(40px); }
+            100% { opacity:1; transform:translateY(0); }
+        }
+        .closing-eyebrow{
+            font-family:'Cormorant Garamond', serif;
+            font-size:0.85rem;
+            letter-spacing:0.6em;
+            text-transform:uppercase;
+            color:#d4b483;
+            opacity:0.7;
+            margin-bottom:50px;
+            animation:closingFade 3s ease 1s both;
+        }
+        @keyframes closingFade{
+            from{ opacity:0; } to{ opacity:0.7; }
+        }
+        .closing-numbers{
+            display:flex;
+            justify-content:center;
+            align-items:baseline;
+            gap:30px;
+            margin-bottom:60px;
+            flex-wrap:wrap;
+        }
+        .closing-num{
+            font-family:'Cormorant Garamond', serif;
+            font-size:4.5rem;
+            font-weight:300;
+            color:#f5f5f5;
+            line-height:1;
+            letter-spacing:-0.02em;
+            animation:closingNumIn 2.5s ease both;
+        }
+        .closing-num:nth-child(1){ animation-delay:1.5s; }
+        .closing-num:nth-child(2){ animation-delay:2.2s; }
+        .closing-num:nth-child(3){ animation-delay:2.9s; }
+        @keyframes closingNumIn{
+            from{ opacity:0; transform:translateY(20px); filter:blur(8px); }
+            to  { opacity:1; transform:translateY(0); filter:blur(0); }
+        }
+        .closing-sep{
+            font-family:'Cormorant Garamond', serif;
+            font-size:2rem;
+            font-style:italic;
+            color:#d4b483;
+            opacity:0.4;
+            animation:closingNumIn 2.5s ease 3.6s both;
+        }
+        .closing-line{
+            font-family:'Cormorant Garamond', serif;
+            font-size:1.6rem;
+            font-style:italic;
+            color:#f5f5f5;
+            line-height:1.5;
+            margin-bottom:40px;
+            animation:closingNumIn 3s ease 4s both;
+            letter-spacing:0.02em;
+        }
+        .closing-tag{
+            font-family:'Montserrat', sans-serif;
+            font-size:0.7rem;
+            letter-spacing:0.5em;
+            text-transform:uppercase;
+            color:#9a9a9a;
+            margin-bottom:80px;
+            animation:closingNumIn 3s ease 4.8s both;
+        }
+        .closing-tag strong{ color:#d4b483; font-weight:500; }
+        .closing-sign{
+            font-family:'Cormorant Garamond', serif;
+            font-style:italic;
+            font-size:1rem;
+            color:#d4b483;
+            opacity:0.7;
+            animation:closingNumIn 3s ease 5.6s both;
+        }
+        .closing-close-btn{
+            position:absolute;
+            top:30px; right:30px;
+            background:transparent;
+            border:1px solid rgba(212,180,131,0.3);
+            color:#d4b483;
+            padding:8px 20px;
+            font-family:'Montserrat', sans-serif;
+            font-size:0.65rem;
+            text-transform:uppercase;
+            letter-spacing:0.3em;
+            cursor:pointer;
+            border-radius:50px;
+            transition:all 0.3s ease;
+            z-index:5;
+            backdrop-filter:blur(8px);
+        }
+        .closing-close-btn:hover{
+            background:rgba(212,180,131,0.15);
+            border-color:rgba(212,180,131,0.6);
+        }
+        @media (max-width:768px){
+            .closing-num{ font-size:3rem; }
+            .closing-line{ font-size:1.2rem; }
+            .closing-numbers{ gap:18px; }
+        }
+
         @media (max-width: 768px) {
             header h1 { font-size: 2.5rem; }
             .lock-title { font-size: 2rem; }
@@ -1098,6 +1240,25 @@
                 </div>
             </div>
 
+            <!-- ============ CIERRE CINEMATOGRÁFICO ============ -->
+            <div class="closing-overlay" id="closingOverlay">
+                <div class="closing-vignette"></div>
+                <button class="closing-close-btn" onclick="closeClosingOverlay()" data-es="× Cerrar" data-en="× Close">× Cerrar</button>
+                <div class="closing-content">
+                    <div class="closing-eyebrow" data-es="La Porcada · Una ventana" data-en="La Porcada · One window">La Porcada · Una ventana</div>
+                    <div class="closing-numbers">
+                        <div class="closing-num">50</div>
+                        <div class="closing-sep">·</div>
+                        <div class="closing-num">500</div>
+                        <div class="closing-sep">·</div>
+                        <div class="closing-num">1</div>
+                    </div>
+                    <div class="closing-line" data-es="50 Beach Houses. 500 finalistas. 1 ventana." data-en="50 Beach Houses. 500 finalists. 1 window.">50 Beach Houses. 500 finalistas. 1 ventana.</div>
+                    <div class="closing-tag" data-es="Próximo compromiso de capital · <strong>Cierre 2026</strong>" data-en="Next capital commitment · <strong>Closing 2026</strong>">Próximo compromiso de capital · <strong>Cierre 2026</strong></div>
+                    <div class="closing-sign" data-es="« La Porcada no abre dos veces. »" data-en="« La Porcada does not open twice. »">« La Porcada no abre dos veces. »</div>
+                </div>
+            </div>
+
             <!-- SECCIÓN DE VIDEOS FINALES EN PRIMER PLANO -->
             <div class="video-section">
                 <h2 class="video-title" data-es="La Visión en Imagen" data-en="The Vision in Images">La Visión en Imagen</h2>
@@ -1207,6 +1368,8 @@
         }
 
         // LÓGICA DEL CARRUSEL Y CATEGORÍAS
+        let closingShownForCategory = ''; // evita que el cierre reaparezca cada vez que se vuelve al último slide
+
         function openCategory(catName) {
             currentCategory = catName;
             document.getElementById('hubView').style.display = 'none';
@@ -1236,6 +1399,8 @@
             clearInterval(autoSlideInterval);
             document.getElementById('carouselView').style.display = 'none';
             document.getElementById('hubView').style.display = 'block';
+            closeClosingOverlay();
+            closingShownForCategory = ''; // resetea para que vuelva a aparecer la próxima vez que se abra el bloque VI
         }
 
         function updateCategoryTitle(catName) {
@@ -1265,6 +1430,36 @@
 
             currentCategorySlides[slideIndex].classList.add('active');
             if (dots[slideIndex]) dots[slideIndex].classList.add('active');
+
+            // CIERRE CINEMATOGRÁFICO: cuando llega al último slide del Bloque VI (competencia)
+            if (currentCategory === 'competencia' && slideIndex === currentCategorySlides.length - 1) {
+                if (closingShownForCategory !== 'competencia') {
+                    closingShownForCategory = 'competencia';
+                    setTimeout(() => showClosingOverlay(), 3500); // deja que el usuario vea la tarjeta 26 un momento
+                }
+            }
+        }
+
+        // ============ CIERRE CINEMATOGRÁFICO ============
+        function showClosingOverlay() {
+            const overlay = document.getElementById('closingOverlay');
+            if (!overlay) return;
+            overlay.classList.add('visible');
+            // Sube el volumen de la música suavemente para el momento cinematográfico
+            const audio = document.getElementById('backgroundAudio');
+            if (audio && !isMuted) {
+                fadeAudio(audio, audio.volume, 0.65, 4000);
+            }
+        }
+        function closeClosingOverlay() {
+            const overlay = document.getElementById('closingOverlay');
+            if (!overlay) return;
+            overlay.classList.remove('visible');
+            // Vuelve a bajar el volumen
+            const audio = document.getElementById('backgroundAudio');
+            if (audio && !isMuted) {
+                fadeAudio(audio, audio.volume, 0.4, 2500);
+            }
         }
 
         function moveSlide(step) {
@@ -1340,6 +1535,7 @@
     </script>
 </body>
 </html>
+
 
 
 
