@@ -914,7 +914,7 @@
     <!-- FONDO CINEMATOGRÁFICO DE LOS MANGLARES -->
     <div class="bg-video-wrapper" id="bgVideoWrapper">
         <video class="bg-manglar-video" id="manglarVideo" autoplay loop muted playsinline>
-            <source src="video/porcaday4.mp4" type="video/mp4">
+            <source src="video/porcaday1.mp4" type="video/mp4">
         </video>
         <div class="bg-manglar-vignette"></div>
     </div>
@@ -1403,9 +1403,16 @@
 
         // LÓGICA DEL CARRUSEL Y CATEGORÍAS
         let closingShownForCategory = ''; // evita que el cierre reaparezca cada vez que se vuelve al último slide
+        let closingTimeoutId = null; // ID del timeout pendiente del cierre cinematográfico (para poder cancelarlo)
 
         function openCategory(catName) {
             currentCategory = catName;
+            // Reset del cierre cinematográfico al entrar a un nuevo módulo,
+            // para que la próxima visita al Bloque VI vuelva a mostrar el overlay.
+            resetClosingState();
+            // FIX: limpiar TODOS los slides al entrar a un nuevo módulo,
+            // para que no quede ningún slide del módulo anterior con la clase 'active'.
+            document.querySelectorAll('.carousel-slide').forEach(slide => slide.classList.remove('active'));
             document.getElementById('hubView').style.display = 'none';
             const carouselView = document.getElementById('carouselView');
             carouselView.style.display = 'flex';
@@ -1431,10 +1438,13 @@
 
         function backToHub() {
             clearInterval(autoSlideInterval);
+            // FIX: limpiar TODOS los slides al volver al menú,
+            // para que no quede ninguna tarjeta en segundo plano.
+            document.querySelectorAll('.carousel-slide').forEach(slide => slide.classList.remove('active'));
             document.getElementById('carouselView').style.display = 'none';
             document.getElementById('hubView').style.display = 'block';
-            closeClosingOverlay();
-            closingShownForCategory = ''; // resetea para que vuelva a aparecer la próxima vez que se abra el bloque VI
+            // Reset del cierre cinematográfico: cancela timeout, cierra overlay y resetea flag.
+            resetClosingState();
         }
 
         function updateCategoryTitle(catName) {
@@ -1458,23 +1468,40 @@
             if (index >= currentCategorySlides.length) slideIndex = 0;
             if (index < 0) slideIndex = currentCategorySlides.length - 1;
 
-            currentCategorySlides.forEach(slide => slide.classList.remove('active'));
+            // FIX: limpiar TODOS los slides (no solo los de la categoría actual)
+            // para evitar que el último slide del módulo anterior se quede en segundo plano.
+            document.querySelectorAll('.carousel-slide').forEach(slide => slide.classList.remove('active'));
             const dots = document.querySelectorAll('.dot');
             dots.forEach(dot => dot.classList.remove('active'));
 
             currentCategorySlides[slideIndex].classList.add('active');
             if (dots[slideIndex]) dots[slideIndex].classList.add('active');
 
-            // CIERRE CINEMATOGRÁFICO: cuando llega al último slide del Bloque VI (competencia)
-            if (currentCategory === 'competencia' && slideIndex === currentCategorySlides.length - 1) {
-                if (closingShownForCategory !== 'competencia') {
-                    closingShownForCategory = 'competencia';
-                    setTimeout(() => showClosingOverlay(), 3500); // deja que el usuario vea la tarjeta 26 un momento
-                }
+            // CIERRE CINEMATOGRÁFICO: aparece en CUALQUIER slide del Bloque VI (competencia),
+            // no solo en el último. Se muestra una vez por visita al módulo;
+            // al cerrar el overlay no reaparece hasta que el usuario salga al menú y vuelva a entrar,
+            // o hasta que navegue manualmente con flechas/dots (ver moveSlide / currentSlide).
+            if (currentCategory === 'competencia' && !closingShownForCategory) {
+                closingShownForCategory = 'competencia';
+                closingTimeoutId = setTimeout(() => {
+                    showClosingOverlay();
+                    closingTimeoutId = null;
+                }, 3500); // deja que el usuario vea la tarjeta un momento
             }
         }
 
         // ============ CIERRE CINEMATOGRÁFICO ============
+        // Helper: cancela cualquier cierre pendiente, cierra el overlay si está visible
+        // y resetea el flag para que el cierre pueda volver a aparecer.
+        function resetClosingState() {
+            if (closingTimeoutId) {
+                clearTimeout(closingTimeoutId);
+                closingTimeoutId = null;
+            }
+            closeClosingOverlay();
+            closingShownForCategory = '';
+        }
+
         function showClosingOverlay() {
             const overlay = document.getElementById('closingOverlay');
             if (!overlay) return;
@@ -1497,12 +1524,17 @@
         }
 
         function moveSlide(step) {
+            // Al navegar manualmente con las flechas dentro del Bloque VI,
+            // reseteamos el cierre cinematográfico para que vuelva a aparecer en el nuevo expediente.
+            if (currentCategory === 'competencia') resetClosingState();
             slideIndex += step;
             showSlide(slideIndex);
             resetAutoSlide();
         }
 
         function currentSlide(index) {
+            // Igual que moveSlide, pero al pulsar un dot.
+            if (currentCategory === 'competencia') resetClosingState();
             slideIndex = index;
             showSlide(slideIndex);
             resetAutoSlide();
@@ -1569,6 +1601,7 @@
     </script>
 </body>
 </html>
+
 
 
 
